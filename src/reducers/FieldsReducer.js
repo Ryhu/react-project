@@ -28,14 +28,14 @@ export default function FieldsReducer(
       let fieldIndexes = ['leftField', 'centerField', 'rightField']
       fieldIndexes.forEach(fieldIndex => {
         for(let i = 0;i<action.amount;i++){
-          tempField.push(fields[Object.keys(fields)[Math.floor(Math.random() * fields.length)]])
+          tempField.push(fields[Object.keys(fields)[Math.floor(Math.random() * Object.keys(fields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
+        tempField = []
       })
-      
       return {
         ...state,
-        leftField: [...tempState.leftfield],
+        leftField: [...tempState.leftField],
         centerField: [...tempState.centerField],
         rightField : [...tempState.rightField],
       }

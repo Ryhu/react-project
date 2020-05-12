@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'; 
 
 class Field extends Component {
+  componentDidMount(){
+    this.props.RandomizedSetup(5)
+  }
   render(){
     return (
       <FieldDisplay className="Display">
@@ -23,5 +26,11 @@ const FieldDisplay = styled.div`
 `
 
 const mapStateToProps = (state) => ({fields: state.fields});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    RandomizedSetup: (amount) => dispatch({ type: 'RANDOMIZED_SETUP', amount: amount }),
+  };
+};
  
-export default connect(mapStateToProps)(Field);
+export default connect(mapStateToProps, mapDispatchToProps)(Field);
