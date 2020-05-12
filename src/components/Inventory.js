@@ -31,8 +31,8 @@ class Inventory extends Component {
 const BackgroundImage = styled.img`
   position: absolute;
   opacity: 0.5;
-  height: 400px;
-  max-width: 400px;
+  height: 16rem;
+  max-width: 16rem;
   z-index: 1;
 `
 const Row = styled.div`
@@ -44,8 +44,8 @@ const Row = styled.div`
 `
 const InventoryDisplay = styled.div`
   background-color: green;
-  padding: 10px;
-  max-width: 360px;
+  padding: 1rem;
+  max-width: 16rem;
   display: flex;
   flex-direction: column;
   div{

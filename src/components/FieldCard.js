@@ -27,13 +27,13 @@ const ItemPickupButton = styled.button`
 `
 const StyledFieldCard = styled.div`
   background-color: red;
-  width: 300px;
-  height: 400px;
+  width: 240px;
+  height: 300px;
   padding: 10px;
 `
 const CardImage = styled.img`
-  max-height: 200px;
-  max-width: 200px;
+  max-height: 100px;
+  max-width: 100px;
   border: 1px solid grey;
   padding: 10px;
 `

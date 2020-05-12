@@ -62,18 +62,15 @@ class InventorySlot extends Component {
 }
 
 const InventorySlotDisplay = styled.div`
-  height: 100px;
-  width: 100px;
+  height: 4rem;
+  width: 4rem;
   display: flex;
-  div{
-    margin: 5px;
-  }
   border: 2px solid grey;
 `
 const ItemImage = styled.img`
-  height: 80px;
-  width: 80px;
-  padding: 10px;
+  height: 3.5rem;
+  width: 3.5rem;
+  padding: .25rem;
   position: relative;
   &.fade-enter {
     top: -40px;
