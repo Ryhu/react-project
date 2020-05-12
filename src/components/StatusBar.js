@@ -15,7 +15,6 @@ class StatusBar  extends Component {
 
 
   render() {
-    console.log(this.props.status)
     const MovingHPBar = styled.div`
       background-color: red;
       width: ${Math.floor(parseFloat(this.props.status.HP) / this.props.status.HPMax * 100) }%;
