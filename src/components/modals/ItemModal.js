@@ -8,7 +8,8 @@ class ItemModal extends React.Component {
   };
 
   useItem = event => {
-    this.props.IncreaseHP(30)
+    this.props.IncreaseHP(this.props.item.recoverAmount)
+    this.props.DeleteItem(this.props.inventoryIndex)
     console.log(this.props)
     this.onClose()
   }
@@ -67,6 +68,7 @@ class ItemModal extends React.Component {
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <p>{this.props.item.flavor}</p>
+          <p>{this.props.item.effectDescription}</p>
           <button onClick={this.useItem}>Use</button>
         </ItemModalDisplay>
       </Anchor>
@@ -79,7 +81,8 @@ const mapStateToProps = (state) => ({status: state.status});
 
 const mapDispatchToProps = dispatch => {
   return {
-    IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount })
+    IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
+    DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
   };
 };
  

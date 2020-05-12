@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import InventorySlot from './InventorySlot.js'
+import { connect } from 'react-redux'; 
 
 class Inventory extends Component {
 
@@ -46,42 +47,48 @@ class Inventory extends Component {
       name: 'Apple',
       type: 'item',
       image: 'apple',
-      flavor: 'a ripe, juicy apple'
+      flavor: 'a ripe, juicy apple',
+      recoverAmount: 10,
     }
     let item2 = {
       name: 'Potion',
       type: 'item',
       image: 'potion',
-      flavor: 'a potion made of red herbs'
+      flavor: 'a potion made of red herbs',
+      recoverAmount: 50,
     }
     let item3 = {
       name: 'Bread',
       type: 'item',
       image: 'bread',
-      flavor: 'made of bread.'
+      flavor: 'made of bread.',
+      recoverAmount: 20,
     }
 
     return (
       <InventoryDisplay>
         <BackgroundImage src="./backpack.png"/>
         <Row>
-          <InventorySlot item={item1}/>
-          <InventorySlot item={item2}/>
-          <InventorySlot item={item3}/>
+          <InventorySlot item={this.props.inventory.backpack[1-1]} inventoryIndex='1' />
+          <InventorySlot item={this.props.inventory.backpack[2-1]} inventoryIndex='2' />
+          <InventorySlot item={this.props.inventory.backpack[3-1]} inventoryIndex='3' />
         </Row>
         <Row>
-          <InventorySlot item={item1}/>
-          <InventorySlot item={item1}/>
-          <InventorySlot />
+          <InventorySlot item={this.props.inventory.backpack[4-1]} inventoryIndex='4' />
+          <InventorySlot item={this.props.inventory.backpack[5-1]} inventoryIndex='5' />
+          <InventorySlot item={this.props.inventory.backpack[6-1]} inventoryIndex='6' />
         </Row>
         <Row>
-          <InventorySlot item={item1}/>
-          <InventorySlot />
-          <InventorySlot />
+          <InventorySlot item={this.props.inventory.backpack[7-1]} inventoryIndex='7' />
+          <InventorySlot item={this.props.inventory.backpack[8-1]} inventoryIndex='8' />
+          <InventorySlot item={this.props.inventory.backpack[9-1]} inventoryIndex='9' />
         </Row>
       </InventoryDisplay>
     )
   }
 }
 
-export default Inventory
+
+const mapStateToProps = (state) => ({inventory: state.inventory});
+ 
+export default connect(mapStateToProps)(Inventory);

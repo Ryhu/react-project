@@ -28,7 +28,12 @@ class InventorySlot extends Component {
           onClick={e => { this.showModal(e) }} 
           src={this.props.item ? './' + this.props.item.image + '.png' : ''}>
         </ItemImage>
-        <ItemModal show={this.state.show} item={this.props.item} onClose={this.showModal}/>
+        <ItemModal 
+          show={this.state.show} 
+          item={this.props.item} 
+          onClose={this.showModal} 
+          inventoryIndex={this.props.inventoryIndex} 
+        />
       </InventorySlotDisplay>
     )
   }
