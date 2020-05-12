@@ -1,6 +1,6 @@
 export default function InventoryReducer(
   state = {
-    activeIndex: 0,
+    activeIndex: null,
     backpack: 
     [ items.Apple,items.Potion,items.Bread,
       null,null,null,
@@ -10,6 +10,11 @@ export default function InventoryReducer(
 ) {
   let tempInventory
   switch (action.type) {
+    case 'SET_ACTIVE_ITEM':
+      return {
+        activeIndex: action.itemIndex,
+        backpack: [...state.backpack]
+      }
     case 'DELETE_ITEM':
       tempInventory = [...state.backpack]
       tempInventory[action.index - 1] = null

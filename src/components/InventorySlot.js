@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ItemModal from './modals/ItemModal';
+import { connect } from 'react-redux'; 
 import { CSSTransition } from "react-transition-group";
 
 
@@ -19,6 +20,9 @@ class InventorySlot extends Component {
       this.setState({
         show: !this.state.show,
       });
+      this.props.inventory.activeIndex === this.props.inventoryIndex 
+        ? this.props.SetActiveItem(null)
+        : this.props.SetActiveItem(this.props.inventoryIndex)
     }
   };
 
@@ -38,7 +42,7 @@ class InventorySlot extends Component {
           </ItemImage> 
         </CSSTransition>
         <CSSTransition
-          in={this.state.show}
+          in={this.props.inventory.activeIndex === this.props.inventoryIndex}
           classNames="fade"
           timeout={300}
           unmountOnExit
@@ -90,6 +94,8 @@ const ItemImage = styled.img`
 `
 const Anchor = styled.div`
   position: relative;
+  width: 1px;
+  height: 1px;
   &.fade-enter {
     opacity: 0;
     transform: scale(0.9);
@@ -111,6 +117,15 @@ const Anchor = styled.div`
     opacity: 0;
     transition: opacity 300ms, transform 300ms;
   }
+  z-index: 4;
 `
 
-export default InventorySlot
+const mapStateToProps = (state) => ({inventory: state.inventory});
+const mapDispatchToProps = dispatch => {
+  return {
+    SetActiveItem: (itemIndex) => dispatch({ type: 'SET_ACTIVE_ITEM', itemIndex: itemIndex }),
+  };
+};
+ 
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(InventorySlot);
