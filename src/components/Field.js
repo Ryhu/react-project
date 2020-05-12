@@ -8,19 +8,22 @@ class Field extends Component {
       name: 'apple',
       type: 'item',
       image: 'apple',
-      flavor: 'just an apple lying on the ground'
+      flavor: 'just an apple lying on the ground',
+      itemIndex: 'Apple'
     }
     let card2 = {
       name: 'potion',
       type: 'item',
       image: 'potion',
-      flavor: 'just a potion lying on the ground'
+      flavor: 'just a potion lying on the ground',
+      itemIndex: 'Potion'
     }
     let card3 = {
       name: 'bread',
       type: 'item',
       image: 'bread',
-      flavor: 'just a bread lying on the ground'
+      flavor: 'just a bread lying on the ground',
+      itemIndex: 'Bread'
     }
 
     return (

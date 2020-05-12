@@ -26,7 +26,7 @@ class InventorySlot extends Component {
     return (
       <InventorySlotDisplay>
         <CSSTransition
-          in={this.props.item}
+          in={!!this.props.item}
           classNames="fade"
           timeout={300}
           unmountOnExit
@@ -70,15 +70,18 @@ const ItemImage = styled.img`
   height: 80px;
   width: 80px;
   padding: 10px;
+  position: relative;
   &.fade-enter {
+    top: -40px;
     opacity: 0;
     transform: scale(0.9);
   }
 
   &.fade-enter-active {
     opacity: 1;
+    top: 0px;
     transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
+    transition: opacity 300ms, transform 300ms, top 300ms;
   }
 
   &.hidden{

@@ -2,7 +2,7 @@ export default function InventoryReducer(
   state = {
     activeIndex: 0,
     backpack: 
-    [ item1,item2,item3,
+    [ items.Apple,items.Potion,items.Bread,
       null,null,null,
       null,null,null ]
   },
@@ -17,33 +17,41 @@ export default function InventoryReducer(
         ...state,
         backpack: tempInventory
       }
+    case 'GET_ITEM':
+      tempInventory = [...state.backpack]
+      tempInventory[tempInventory.indexOf(null)] = items[action.itemIndex]
+      return {
+        ...state,
+        backpack: tempInventory
+      }
     default:
       return state;
   }
 }
 
-
-let item1 = {
-  name: 'Apple',
-  type: 'item',
-  image: 'apple',
-  flavor: 'a ripe, juicy apple',
-  effectDescription: 'heals 10 HP',
-  recoverAmount: 10,
-}
-let item2 = {
-  name: 'Potion',
-  type: 'item',
-  image: 'potion',
-  flavor: 'a potion made of red herbs',
-  effectDescription: 'heals 50 HP',
-  recoverAmount: 50,
-}
-let item3 = {
-  name: 'Bread',
-  type: 'item',
-  image: 'bread',
-  flavor: 'made of bread.',
-  effectDescription: 'heals 20 HP',
-  recoverAmount: 20,
+let items = {
+  'Apple': {
+    name: 'Apple',
+    type: 'item',
+    image: 'apple',
+    flavor: 'a ripe, juicy apple',
+    effectDescription: 'heals 10 HP',
+    recoverAmount: 10,
+  },
+  'Potion': {
+    name: 'Potion',
+    type: 'item',
+    image: 'potion',
+    flavor: 'a potion made of red herbs',
+    effectDescription: 'heals 50 HP',
+    recoverAmount: 50,
+  },
+  'Bread': {
+    name: 'Bread',
+    type: 'item',
+    image: 'bread',
+    flavor: 'made of bread.',
+    effectDescription: 'heals 20 HP',
+    recoverAmount: 20,
+  }
 }

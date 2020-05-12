@@ -27,7 +27,7 @@ class StatusBar extends Component {
 const StatusContainer = styled.div`
   width: 80%;
   background-color: #ccffff;
-  height: 300px;
+  height: 100px;
   border-radius: 15px;
   border: 6px solid grey;
   margin: auto;
