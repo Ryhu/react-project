@@ -2,18 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux'; 
 
-class StatusBar  extends Component {
-
-  constructor(){
-    super()
-
-    this.state = {
-      
-    }
-  }
-
-
-
+class StatusBar extends Component {
   render() {
     const MovingHPBar = styled.div`
       background-color: red;

@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import FieldCard from './FieldCardDisplay.js'
+import FieldCard from './FieldCard.js'
 import styled from 'styled-components'
 
 class Field extends Component {
-
-  constructor(){
-    super()
-
-    this.state = {
-      
-    }
-  }
-
   render() {
     let card1 = {
       name: 'apple',
@@ -32,12 +23,6 @@ class Field extends Component {
       flavor: 'just a bread lying on the ground'
     }
 
-    const FieldDisplay = styled.div`
-      display: flex;
-      div{
-        margin: 5px;
-      }
-    `
     return (
       <FieldDisplay className="Display">
         <FieldCard card={card1} />
@@ -47,5 +32,12 @@ class Field extends Component {
     )
   }
 }
+
+const FieldDisplay = styled.div`
+  display: flex;
+  div{
+    margin: 5px;
+  }
+`
 
 export default Field
