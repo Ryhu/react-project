@@ -13,7 +13,7 @@ class InventorySlot extends Component {
     }
   }
 
-  showModal = e => {
+  showModal = event => {
     if(this.props.item){
       this.setState({
         show: !this.state.show,

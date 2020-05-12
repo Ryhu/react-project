@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import { connect } from 'react-redux'; 
 import Display from './components/Display'
 
-function App() {
-  return (
-    <div className="App">
-      <Display />
-    </div>
-  );
+
+class App extends Component {
+
+  handleOnClick = event => {
+    this.props.increaseCount();
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Display />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { status: state.status };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    increaseCount: () => dispatch({ type: 'INCREASE_COUNT' })
+  };
+};
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(App);

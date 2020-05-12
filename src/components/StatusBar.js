@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+import { connect } from 'react-redux'; 
 
 class StatusBar  extends Component {
 
@@ -14,6 +15,7 @@ class StatusBar  extends Component {
 
 
   render() {
+    console.log(this.props.status)
     const MovingHPBar = styled.div`
       background-color: red;
       width: ${Math.floor(parseFloat(this.props.status.HP) / this.props.status.HPMax * 100) }%;
@@ -67,5 +69,6 @@ const HPBarText = styled.p`
   width: 100%;
   text-align: center;
 `
-
-export default StatusBar
+const mapStateToProps = (state) => ({status: state.status});
+ 
+export default connect(mapStateToProps)(StatusBar);

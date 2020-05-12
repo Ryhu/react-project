@@ -1,10 +1,17 @@
 import React from "react";
 import styled from 'styled-components';
+import { connect } from 'react-redux'; 
 
-export default class ItemModal extends React.Component {
-  onClose = e => {
-    this.props.onClose && this.props.onClose(e);
+class ItemModal extends React.Component {
+  onClose = event => {
+    this.props.onClose && this.props.onClose(event);
   };
+
+  useItem = event => {
+    this.props.IncreaseHP(30)
+    console.log(this.props)
+    this.onClose()
+  }
 
   render() {
 
@@ -29,7 +36,7 @@ export default class ItemModal extends React.Component {
       }
     `
 
-    const anchor = styled.div`
+    const Anchor = styled.div`
       position: relative;
     `
 
@@ -54,14 +61,26 @@ export default class ItemModal extends React.Component {
       return null;
     }
     return (
-      <anchor >
-        <ItemModalDisplay class="modal" id="modal">
-          <CloseButton onClick={this.onClose} onMouseOut={this.onClose} class="toggle-button">Close</CloseButton>
+      <Anchor >
+        <ItemModalDisplay id="modal">
+          <CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <p>{this.props.item.flavor}</p>
+          <button onClick={this.useItem}>Use</button>
         </ItemModalDisplay>
-      </anchor>
+      </Anchor>
     );
   }
 }
+
+
+const mapStateToProps = (state) => ({status: state.status});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount })
+  };
+};
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(ItemModal);
