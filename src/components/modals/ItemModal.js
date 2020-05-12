@@ -8,52 +8,41 @@ class ItemModal extends React.Component {
   };
 
   useItem = event => {
+    this.onClose()
     this.props.IncreaseHP(this.props.item.recoverAmount)
     this.props.DeleteItem(this.props.inventoryIndex)
-    this.onClose()
   }
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
     return (
-      <Anchor >
-        <ItemModalDisplay id="modal">
-          <CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
+      <ItemModalDisplay id="modal">
+        {this.props.item 
+          ? <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <p>{this.props.item.flavor}</p>
           <p>{this.props.item.effectDescription}</p>
-          <button onClick={this.useItem}>Use</button>
-        </ItemModalDisplay>
-      </Anchor>
+          <UseButton onClick={this.useItem}>Use</UseButton></>
+          : null
+      }
+      </ItemModalDisplay>
     );
   }
 }
 
 const ItemModalDisplay = styled.div`
-  transition: 0.1s all ease-in;
   top:-450px;
   left: -100px;
   position: relative;
   width: 300px;
   height: 450px;
-  background: white;
+  background: #ccffcc;
   border: 1px solid #ccc;
-  transition: 1.1s ease-out;
   box-shadow: 
     -2rem 2rem 2rem rgba(black, 0.2);
   filter: blur(0);
-  transform: scale(1);  
   border-radius: 10px;
   border: 5px solid blue;
-  :hover{
-    border: 5px solid yellow;
-  }
-`
-const Anchor = styled.div`
-  position: relative;
 `
 const CloseButton = styled.p`
   text-align: right;
@@ -62,6 +51,12 @@ const CloseButton = styled.p`
   padding-left: 3px;
   padding-bottom: 3px;
   cursor: pointer;
+`
+const UseButton = styled.button`
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 1rem;
 `
 const ItemImage = styled.img`
   max-height: 150px;
