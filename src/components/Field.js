@@ -1,36 +1,15 @@
 import React, { Component } from 'react';
 import FieldCard from './FieldCard.js'
 import styled from 'styled-components'
+import { connect } from 'react-redux'; 
 
 class Field extends Component {
-  render() {
-    let card1 = {
-      name: 'apple',
-      type: 'item',
-      image: 'apple',
-      flavor: 'just an apple lying on the ground',
-      itemIndex: 'Apple'
-    }
-    let card2 = {
-      name: 'potion',
-      type: 'item',
-      image: 'potion',
-      flavor: 'just a potion lying on the ground',
-      itemIndex: 'Potion'
-    }
-    let card3 = {
-      name: 'bread',
-      type: 'item',
-      image: 'bread',
-      flavor: 'just a bread lying on the ground',
-      itemIndex: 'Bread'
-    }
-
+  render(){
     return (
       <FieldDisplay className="Display">
-        <FieldCard card={card1} />
-        <FieldCard card={card2} />
-        <FieldCard card={card3} />
+        <FieldCard card={this.props.fields.leftField[0]} />
+        <FieldCard card={this.props.fields.centerField[0]} />
+        <FieldCard card={this.props.fields.rightField[0]} />
       </FieldDisplay>
     )
   }
@@ -43,4 +22,6 @@ const FieldDisplay = styled.div`
   }
 `
 
-export default Field
+const mapStateToProps = (state) => ({fields: state.fields});
+ 
+export default connect(mapStateToProps)(Field);
