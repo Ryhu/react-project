@@ -5,19 +5,22 @@ import styled from 'styled-components'
 class FieldCard extends Component {
   getItem = () => {
     this.props.GetItem(this.props.card.itemIndex)
+    this.props.DeleteField(this.props.fieldIndex)
   }
 
   render() {
     return (
-      <StyledFieldCard>
-        <p>{this.props.card.name}</p>
-        <p>{this.props.card.type}</p>
-        <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
-        <p>{this.props.card.flavor}</p>
-        { this.props.card.type == 'item'
-          ? <ItemPickupButton onClick={this.getItem}>Pick Up</ItemPickupButton>
-          : null }
-      </StyledFieldCard>
+      this.props.card 
+      ? <StyledFieldCard>
+          <p>{this.props.card.name}</p>
+          <p>{this.props.card.type}</p>
+          <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
+          <p>{this.props.card.flavor}</p>
+          { this.props.card.type == 'item'
+            ? <ItemPickupButton onClick={this.getItem}>Pick Up</ItemPickupButton>
+            : null }
+        </StyledFieldCard>
+      : <StyledFieldCard></StyledFieldCard>
     )
   }
 }
@@ -42,7 +45,7 @@ const mapStateToProps = (state) => ({status: state.status});
 
 const mapDispatchToProps = dispatch => {
   return {
-    IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
+    DeleteField: (fieldIndex) => dispatch({ type: 'DELETE_FIELD', fieldIndex: fieldIndex }),
     GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
   };
 };

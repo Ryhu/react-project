@@ -7,9 +7,9 @@ class Field extends Component {
   render(){
     return (
       <FieldDisplay className="Display">
-        <FieldCard card={this.props.fields.leftField[0]} />
-        <FieldCard card={this.props.fields.centerField[0]} />
-        <FieldCard card={this.props.fields.rightField[0]} />
+        <FieldCard card={this.props.fields.leftField[0]} fieldIndex='leftField'/>
+        <FieldCard card={this.props.fields.centerField[0]} fieldIndex='centerField'/>
+        <FieldCard card={this.props.fields.rightField[0]} fieldIndex='rightField'/>
       </FieldDisplay>
     )
   }
