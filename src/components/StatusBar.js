@@ -9,9 +9,18 @@ class StatusBar extends Component {
       width: ${Math.floor(parseFloat(this.props.status.HP) / this.props.status.HPMax * 100) }%;
       height: 50px;
       position: absolute;
-      border-radius: 5px;
+      border-radius: 7px;
+      z-index: 2;
+    `    
+    const MovingHungerBar = styled.div`
+      background-color: orange;
+      width: ${Math.floor(parseFloat(this.props.status.Hunger) / this.props.status.HungerMax * 100) }%;
+      height: 50px;
+      position: absolute;
+      border-radius: 7px;
       z-index: 2;
     `
+    
 
     return (
       <StatusContainer>
@@ -19,6 +28,10 @@ class StatusBar extends Component {
           <MovingHPBar></MovingHPBar>
           <HPBarText>{this.props.status.HP + '/' + this.props.status.HPMax}</HPBarText>
         </HPBar>
+        <HungerBar>
+          <MovingHungerBar></MovingHungerBar>
+          <HungerBarText>{this.props.status.Hunger + '/' + this.props.status.HungerMax}</HungerBarText>
+        </HungerBar>
       </StatusContainer>
     )
   }
@@ -33,6 +46,8 @@ const StatusContainer = styled.div`
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
 `
 
 const HPBar = styled.div`
@@ -40,14 +55,35 @@ const HPBar = styled.div`
   margin: 20px;
   width: 400px;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 2px solid black;
   font-size: 2rem;
   position: relative;
   z-index: 1
 `
-
 const HPBarText = styled.p` 
+  -webkit-text-fill-color: white; 
+  -webkit-text-stroke-width: .9px;
+  -webkit-text-stroke-color: black;
+  margin-top: 0;
+  z-index: 3;
+  position: relative;
+  width: 100%;
+  text-align: center;
+`
+
+const HungerBar = styled.div`
+  background-color: black;
+  margin: 20px;
+  width: 400px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-size: 2rem;
+  position: relative;
+  z-index: 1
+`
+const HungerBarText = styled.p` 
   -webkit-text-fill-color: white; 
   -webkit-text-stroke-width: .9px;
   -webkit-text-stroke-color: black;

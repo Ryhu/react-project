@@ -2,6 +2,8 @@ export default function StatusReducer(
     state = {
       HP: 50,
       HPMax: 200,
+      Hunger: 10,
+      HungerMax: 100,
     },
     action
   ) {
@@ -10,6 +12,11 @@ export default function StatusReducer(
         return {
           ...state,
           HP: state.HP + action.amount > state.HPMax ? state.HPMax : state.HP + action.amount
+        }
+      case 'INCREASE_HUNGER':
+        return {
+          ...state,
+          Hunger: state.Hunger + action.amount > state.HungerMax ? state.HungerMax : state.Hunger + action.amount
         }
       default:
         return state;

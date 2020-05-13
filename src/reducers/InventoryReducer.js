@@ -40,8 +40,9 @@ let items = {
     type: 'item',
     image: 'apple',
     flavor: 'a ripe, juicy apple',
-    effectDescription: 'heals 10 HP',
-    recoverAmount: 10,
+    effectDescription: 'heals 5 HP, 5 Hunger',
+    HPUp: 5,
+    HungerUp: 5,
   },
   'Potion': {
     name: 'Potion',
@@ -49,14 +50,15 @@ let items = {
     image: 'potion',
     flavor: 'a potion made of red herbs',
     effectDescription: 'heals 50 HP',
-    recoverAmount: 50,
+    HPUp: 50,
   },
   'Bread': {
     name: 'Bread',
     type: 'item',
     image: 'bread',
     flavor: 'made of bread.',
-    effectDescription: 'heals 20 HP',
-    recoverAmount: 20,
+    effectDescription: 'heals 10 HP, 20 Hunger',
+    HPUp: 10,
+    HungerUp: 20,
   }
 }

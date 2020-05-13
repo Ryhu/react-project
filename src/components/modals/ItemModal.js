@@ -9,7 +9,16 @@ class ItemModal extends React.Component {
 
   useItem = event => {
     this.onClose()
-    this.props.IncreaseHP(this.props.item.recoverAmount)
+    if(this.props.item.HPUp){
+      this.props.IncreaseHP(this.props.item.HPUp)
+    }
+    if(this.props.item.HungerUp){
+      this.props.IncreaseHunger(this.props.item.HungerUp)
+    }
+    this.props.DeleteItem(this.props.inventoryIndex)
+  }
+  discardItem = event => {
+    this.onClose()
     this.props.DeleteItem(this.props.inventoryIndex)
   }
 
@@ -22,7 +31,8 @@ class ItemModal extends React.Component {
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <p>{this.props.item.flavor}</p>
           <p>{this.props.item.effectDescription}</p>
-          <UseButton onClick={this.useItem}>Use</UseButton></>
+          <UseButton onClick={this.useItem}>Use</UseButton>
+          <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
           : null
       }
       </ItemModalDisplay>
@@ -58,6 +68,12 @@ const UseButton = styled.button`
   border-radius: 5px;
   padding: 1rem;
 `
+const DiscardButton = styled.button`
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 1rem;
+`
 const ItemImage = styled.img`
   max-height: 150px;
   max-width: 150px;
@@ -70,6 +86,7 @@ const mapStateToProps = (state) => ({status: state.status});
 const mapDispatchToProps = dispatch => {
   return {
     IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
+    IncreaseHunger: (amount) => dispatch({ type: 'INCREASE_HUNGER', amount: amount }),
     DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
   };
 };
