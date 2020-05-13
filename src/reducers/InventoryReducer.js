@@ -3,7 +3,7 @@ export default function InventoryReducer(
     activeIndex: null,
     backpack: 
     [ items.Apple,items.Potion,items.Bread,
-      null,null,null,
+      items.Rock,null,null,
       null,null,null ]
   },
   action
@@ -37,7 +37,7 @@ export default function InventoryReducer(
 let items = {
   'Apple': {
     name: 'Apple',
-    type: 'item',
+    type: 'consumable',
     image: 'apple',
     flavor: 'a ripe, juicy apple',
     effectDescription: 'heals 5 HP, 5 Hunger',
@@ -46,7 +46,7 @@ let items = {
   },
   'Potion': {
     name: 'Potion',
-    type: 'item',
+    type: 'consumable',
     image: 'potion',
     flavor: 'a potion made of red herbs',
     effectDescription: 'heals 50 HP',
@@ -54,11 +54,18 @@ let items = {
   },
   'Bread': {
     name: 'Bread',
-    type: 'item',
+    type: 'consumable',
     image: 'bread',
     flavor: 'made of bread.',
     effectDescription: 'heals 10 HP, 20 Hunger',
     HPUp: 10,
     HungerUp: 20,
-  }
+  },
+  'Rock': {
+    name: 'Rock',
+    type: 'crafting',
+    image: 'rock',
+    flavor: 'kinda hard.',
+    effectDescription: 'heals 10 HP, 20 Hunger',
+  },
 }

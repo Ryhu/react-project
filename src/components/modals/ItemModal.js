@@ -23,6 +23,20 @@ class ItemModal extends React.Component {
   }
 
   render() {
+    const ItemModalDisplay = styled.div`
+      top: -27rem;
+      left: -100px;
+      position: relative;
+      width: 18rem;
+      height: 25rem;
+      background: ${this.props.item ? colorDictionary[this.props.item.type] : 'white'};
+      border: 1px solid #ccc;
+      box-shadow: 
+        -2rem 2rem 2rem rgba(black, 0.2);
+      filter: blur(0);
+      border-radius: 10px;
+      border: 5px solid blue;
+    `
     return (
       <ItemModalDisplay id="modal">
         {this.props.item 
@@ -31,7 +45,7 @@ class ItemModal extends React.Component {
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <p>{this.props.item.flavor}</p>
           <p>{this.props.item.effectDescription}</p>
-          <UseButton onClick={this.useItem}>Use</UseButton>
+          {this.props.item.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
           <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
           : null
       }
@@ -40,20 +54,10 @@ class ItemModal extends React.Component {
   }
 }
 
-const ItemModalDisplay = styled.div`
-  top:-450px;
-  left: -100px;
-  position: relative;
-  width: 300px;
-  height: 450px;
-  background: #ccffcc;
-  border: 1px solid #ccc;
-  box-shadow: 
-    -2rem 2rem 2rem rgba(black, 0.2);
-  filter: blur(0);
-  border-radius: 10px;
-  border: 5px solid blue;
-`
+const colorDictionary = {
+  'consumable': '#ccffcc',
+  'crafting': '#ffefcc'
+}
 const CloseButton = styled.p`
   text-align: right;
   margin-top: 2px;
@@ -75,8 +79,8 @@ const DiscardButton = styled.button`
   padding: 1rem;
 `
 const ItemImage = styled.img`
-  max-height: 150px;
-  max-width: 150px;
+  max-height: 120px;
+  max-width: 120px;
   border: 1px solid grey;
   padding: 10px;
 `
