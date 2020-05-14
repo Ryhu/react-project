@@ -11,7 +11,7 @@ class FieldCard extends Component {
   render() {
     return (
       this.props.card 
-      ? <StyledFieldCard>
+      ? <StyledFieldCard onClick={this.props.TriggerEvent}>
           <p>{this.props.card.name}</p>
           <p>{this.props.card.type}</p>
           <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
@@ -47,6 +47,7 @@ const mapDispatchToProps = dispatch => {
   return {
     DeleteField: (fieldIndex) => dispatch({ type: 'DELETE_FIELD', fieldIndex: fieldIndex }),
     GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
+    TriggerEvent: () => dispatch({ type: 'TRIGGER_EVENT' }),
   };
 };
  
