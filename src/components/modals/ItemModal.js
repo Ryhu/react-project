@@ -41,19 +41,18 @@ class ItemModal extends React.Component {
     return (
       <ItemModalDisplay id="modal">
         {this.props.item 
-          ? <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
+          && <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <EffectsDiv>
-            { this.props.item.HPUp && <IconSpan>{this.props.item.HPUp}<Icon src='./heart.png'></Icon></IconSpan> }
-            { this.props.item.HungerUp && <IconSpan>{this.props.item.HungerUp}<Icon src='./apple.png'></Icon></IconSpan> }
-            { this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan> }
+            {this.props.item.HPUp && <IconSpan>{this.props.item.HPUp}<Icon src='./heart.png'></Icon></IconSpan>}
+            {this.props.item.HungerUp && <IconSpan>{this.props.item.HungerUp}<Icon src='./apple.png'></Icon></IconSpan>}
+            {this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan>}
           </EffectsDiv>
           <p>{this.props.item.flavor}</p>
-          {this.props.item.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
+          {this.props.item.type == 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
           <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
-          : null
-      }
+        }
       </ItemModalDisplay>
     );
   }
