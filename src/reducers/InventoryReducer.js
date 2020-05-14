@@ -19,6 +19,11 @@ export default function InventoryReducer(
         activeIndex: action.inventoryIndex,
         backpack: [...state.backpack]
       }
+    case 'REMOVE_ACTIVE_ITEM':
+      return {
+        activeIndex: null,
+        backpack: [...state.backpack]
+      }
     case 'DELETE_ITEM':
       tempInventory = [...state.backpack]
       tempInventory[action.index - 1] = null

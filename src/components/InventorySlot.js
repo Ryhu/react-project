@@ -17,6 +17,7 @@ class InventorySlot extends Component {
 
   startDrag = event => {
     this.props.DragStart({ inventoryIndex: this.props.inventoryIndex, item: this.props.item })
+    this.props.RemoveActiveItem()
   }
 
   dragOver = event => {
@@ -145,6 +146,7 @@ const mapDispatchToProps = dispatch => {
     SwapItems: (inventoryIndex1, inventoryIndex2) => dispatch({ type: 'SWAP_ITEMS', inventoryIndex1: inventoryIndex1, inventoryIndex2: inventoryIndex2}),
     DragStart: (item) => dispatch({ type: 'DRAG_START', item: item }),
     DragEnd: () => dispatch({ type: 'DRAG_END' }),
+    RemoveActiveItem: () => dispatch({ type: 'REMOVE_ACTIVE_ITEM' }),
   };
 };
 
