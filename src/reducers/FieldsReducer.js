@@ -50,9 +50,22 @@ let fields = {
     type: 'item',
     image: 'apple',
     flavor: 'a ripe, juicy apple',
-    effectDescription: 'heals 10 HP',
-    recoverAmount: 10,
-    itemIndex: 'Apple',
+    event: {
+      text: 'You come across an apple on the ground!',
+      buttons: ['Take', 'Discard'],
+      effects: [['GetItem', 'Apple'], ['end']],
+    },
+  },
+  'EventTrap1': {
+    name: 'Suspicious grass',
+    type: 'event',
+    image: '',
+    flavor: 'somethings not quite right',
+    event: {
+      text: 'You come across an apple on the ground!',
+      buttons: ['Take', 'Discard'],
+      effects: [['getItem', 'Apple'], ['end']],
+    },
   },
   'ItemPotion1': {
     name: 'Potion',

@@ -44,8 +44,12 @@ class ItemModal extends React.Component {
           ? <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
+          <EffectsDiv>
+            { this.props.item.HPUp && <IconSpan>{this.props.item.HPUp}<Icon src='./heart.png'></Icon></IconSpan> }
+            { this.props.item.HungerUp && <IconSpan>{this.props.item.HungerUp}<Icon src='./apple.png'></Icon></IconSpan> }
+            { this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan> }
+          </EffectsDiv>
           <p>{this.props.item.flavor}</p>
-          <p>{this.props.item.effectDescription}</p>
           {this.props.item.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
           <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
           : null
@@ -59,6 +63,21 @@ const colorDictionary = {
   'consumable': '#ccffcc',
   'crafting': '#ffefcc'
 }
+const EffectsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
+const IconSpan = styled.span`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+`
+const Icon = styled.img`
+  height: 1.1rem;
+  width: 1.1rem;
+  margin-right: .3rem;
+`
 const CloseButton = styled.p`
   text-align: right;
   margin-top: 2px;
