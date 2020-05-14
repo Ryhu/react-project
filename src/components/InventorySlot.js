@@ -15,6 +15,22 @@ class InventorySlot extends Component {
     }
   }
 
+  startDrag = event => {
+    this.props.DragStart({ inventoryIndex: this.props.inventoryIndex, item: this.props.item })
+  }
+
+  dragOver = event => {
+    event.preventDefault();
+  }
+
+  dropped = event => {
+    event.preventDefault()
+    if (this.props.system.dragItem) {
+      this.props.SwapItems(this.props.inventoryIndex-1, this.props.system.dragItem.inventoryIndex-1)
+      this.props.DragEnd()
+    }
+  }
+
   showModal = event => {
     if(this.props.item){
       this.setState({
@@ -28,7 +44,10 @@ class InventorySlot extends Component {
 
   render() {
     return (
-      <InventorySlotDisplay>
+      <InventorySlotDisplay
+        onDrop={this.dropped}
+        onDragOver={this.dragOver}
+        onClick={e => { this.showModal(e) }} >
         <CSSTransition
           in={!!this.props.item}
           classNames="fade"
@@ -36,7 +55,9 @@ class InventorySlot extends Component {
           unmountOnExit
         >
           <ItemImage  
-            onClick={e => { this.showModal(e) }} 
+            draggable 
+            onDragStart={this.startDrag}
+            onDragEnd={this.props.DragEnd}
             className={this.props.item ? '' : 'hidden'}
             src={this.props.item ? './' + this.props.item.image + '.png' : null}>
           </ItemImage> 
@@ -68,10 +89,10 @@ const InventorySlotDisplay = styled.div`
   border: 2px solid grey;
 `
 const ItemImage = styled.img`
-  height: 3.5rem;
-  width: 3.5rem;
-  padding: .25rem;
-  position: relative;
+height: 3.5rem;
+width: 3.5rem;
+padding: .25rem;
+position: relative;
   &.fade-enter {
     top: -40px;
     opacity: 0;
@@ -90,7 +111,7 @@ const ItemImage = styled.img`
   }
 `
 const Anchor = styled.div`
-  position: relative;
+position: relative;
   width: 1px;
   height: 1px;
   &.fade-enter {
@@ -117,12 +138,15 @@ const Anchor = styled.div`
   z-index: 4;
 `
 
-const mapStateToProps = (state) => ({inventory: state.inventory});
+const mapStateToProps = (state) => ({inventory: state.inventory, system: state.system});
 const mapDispatchToProps = dispatch => {
   return {
-    SetActiveItem: (itemIndex) => dispatch({ type: 'SET_ACTIVE_ITEM', itemIndex: itemIndex }),
+    SetActiveItem: (inventoryIndex) => dispatch({ type: 'SET_ACTIVE_ITEM', inventoryIndex: inventoryIndex }),
+    SwapItems: (inventoryIndex1, inventoryIndex2) => dispatch({ type: 'SWAP_ITEMS', inventoryIndex1: inventoryIndex1, inventoryIndex2: inventoryIndex2}),
+    DragStart: (item) => dispatch({ type: 'DRAG_START', item: item }),
+    DragEnd: () => dispatch({ type: 'DRAG_END' }),
   };
 };
- 
- 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(InventorySlot);
