@@ -37,18 +37,29 @@ class EventModal extends React.Component {
     //   border-radius: 10px;
     //   border: 5px solid blue;
     // `
+
+    // 'ItemApple1': {
+    //   name: 'Apple',
+    //   type: 'item',
+    //   image: 'apple',
+    //   flavor: 'a ripe, juicy apple',
+    //   event: {
+    //     text: 'You come across an apple on the ground!',
+    //     buttons: ['Take', 'Discard'],
+    //     effects: [['GetItem', 'Apple'], ['end']],
+    //   },
+    // },
     return (
       <EventModalDisplay id="modal">
-        {/* {this.props.item 
-          ? <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
-          <h2>{this.props.item.name}</h2>
-          <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
-          <p>{this.props.item.flavor}</p>
-          <p>{this.props.item.effectDescription}</p>
-          {this.props.item.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
-          <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
-          : null
-      } */}
+        {this.props.system.event != null && 
+          <>
+          <h2>{this.props.system.event.name}</h2>
+          <p>{this.props.system.event.flavor}</p>
+          <p>{this.props.system.event.effectDescription}</p>
+          {this.props.system.event.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
+          <DiscardButton onClick={this.discardItem}>Discard</DiscardButton>
+          </>
+      }
       </EventModalDisplay>
     );
   }
@@ -57,9 +68,10 @@ class EventModal extends React.Component {
 const EventModalDisplay = styled.div`
   height: 20rem;
   width: 60rem;
-  background-color: black;
+  background-color: green;
+  width: 60%;
 `
-const DiscardButton = styled.button`
+const Button = styled.button`
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 5px;
@@ -72,7 +84,7 @@ const ItemImage = styled.img`
   padding: 10px;
 `
 
-const mapStateToProps = (state) => ({status: state.status});
+const mapStateToProps = (state) => ({status: state.status, system: state.system});
 
 const mapDispatchToProps = dispatch => {
   return {

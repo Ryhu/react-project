@@ -1,6 +1,6 @@
 export default function SystemReducer(
   state = {
-    event: false,
+    event: null,
     dragItem: null
   },
   action
@@ -9,12 +9,12 @@ export default function SystemReducer(
     case 'TRIGGER_EVENT':
       return {
         ...state,
-       event: true
+       event: action.event
       }
     case 'END_EVENT':
       return {
         ...state,
-        event: false
+        event: null
       }
     case 'DRAG_START':
       return {

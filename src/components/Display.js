@@ -11,7 +11,9 @@ class Display extends Component {
     console.log(this.props)
     return (
       <DisplayContainer >
-          <Field />
+        {this.props.system.event !== null
+          ? <EventModal />
+          : <Field />}
         <InventoryAndStatus className="invstatus">
           <StatusBar />
           <Inventory />

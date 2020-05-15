@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class ItemModal extends React.Component {
   onClose = event => {
     this.props.onClose && this.props.onClose(event);
-  };
+  }
 
   useItem = event => {
     this.onClose()
@@ -17,6 +17,7 @@ class ItemModal extends React.Component {
     }
     this.props.DeleteItem(this.props.inventoryIndex)
   }
+
   discardItem = event => {
     this.onClose()
     this.props.DeleteItem(this.props.inventoryIndex)
@@ -41,7 +42,7 @@ class ItemModal extends React.Component {
     return (
       <ItemModalDisplay id="modal">
         {this.props.item 
-          && <><CloseButton onClick={this.onClose} onMouseOut={this.onClose}>Close</CloseButton>
+          && <><CloseButton onClick={this.onClose}>Close</CloseButton>
           <h2>{this.props.item.name}</h2>
           <ItemImage src={'./' + this.props.item.image + '.png'}></ItemImage>
           <EffectsDiv>

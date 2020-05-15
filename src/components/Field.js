@@ -19,6 +19,7 @@ class Field extends Component {
 }
 
 const FieldDisplay = styled.div`
+width: 60%;
   display: flex;
   div{
     margin: 5px;
