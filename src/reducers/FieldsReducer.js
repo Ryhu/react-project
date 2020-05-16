@@ -105,7 +105,7 @@ let events = {
   ItemBread1: {
     title: 'A Bread',
     image: 'Bread',
-    text: 'You come across an Bread on the ground!',
+    text: 'You come across a loaf of bread on the ground!',
     buttons: [
       {
         name: 'Take',
@@ -125,7 +125,7 @@ let events = {
   EventTrapPitfall1_1: {
     title: 'ITS A TRAP!',
     image: 'kobold',
-    text: 'As you take a step forward, you get this eerie feeling before your foot touches the ground. Do you throw yourself sidedays (uses 5 energy) at the last moment, or continue the step?',
+    text: 'As you take a step forward, you get this eerie feeling before your foot touches the ground. Do you throw yourself sideways (uses 5 energy) at the last moment, or continue the step?',
     buttons: [
       {
         name: 'Dodge',
@@ -144,7 +144,7 @@ let events = {
   EventTrapPitfall1_2: {
     title: 'ITS A TRAP!',
     image: 'kobold',
-    text: 'Using 5 points of stamina, you throw yourself sideways. After picking yourself up, you poke at the ground you would have stepped with it stick. The earth gives way and reveals a massive hole, at least 5 feet deep. Good thing you avoided that!',
+    text: 'Using 5 points of stamina, you throw yourself sideways. After picking yourself up, you poke at the ground you would have stepped with a stick. The earth gives way and reveals a massive hole, at least 5 feet deep. Good thing you avoided that!',
     buttons: [
       {
         name: 'Continue',
@@ -158,7 +158,7 @@ let events = {
   EventTrapPitfall1_3: {
     title: 'ITS A TRAP!',
     image: 'kobold',
-    text: 'Ignoring your instincts, you step forward anyway. What kind of idiot would throw take such a drastic measure for a stupid suspicion, anyway? You feel nothing as your foot touches the earth in front of you, and continue feeling nothing as the earth opens up and you plunge into the very well made pitfall trap, taking 10 damage.',
+    text: 'Ignoring your instincts, you step forward anyway. What kind of idiot would take such a drastic measure for a stupid suspicion, anyway? As you step forward, the ground opens up, revealing a massive pitfall trap. After you hit the bottom, taking 10 damage, you wonder who would make such a thing in the middle of a place like this.',
     buttons: [
       {
         name: 'Continue',
