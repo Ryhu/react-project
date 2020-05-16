@@ -51,7 +51,7 @@ class ItemModal extends React.Component {
             {this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan>}
           </EffectsDiv>
           <p>{this.props.item.flavor}</p>
-          {this.props.item.type == 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
+          {this.props.item.type === 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
           <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
         }
       </ItemModalDisplay>

@@ -7,7 +7,7 @@ class EventModal extends React.Component {
     this.props.onClose && this.props.onClose(event);
   };
 
-  useItem = event => {
+  useItem = () => {
     this.onClose()
     if(this.props.item.HPUp){
       this.props.IncreaseHP(this.props.item.HPUp)
@@ -17,38 +17,29 @@ class EventModal extends React.Component {
     }
     this.props.DeleteItem(this.props.inventoryIndex)
   }
-  discardItem = event => {
+  discardItem(){
     this.onClose()
     this.props.DeleteItem(this.props.inventoryIndex)
   }
 
   render() {
-    // const EventModalDisplay = styled.div`
-    //   top: -27rem;
-    //   left: -100px;
-    //   position: relative;
-    //   width: 18rem;
-    //   height: 25rem;
-    //   background: ${this.props.item ? colorDictionary[this.props.item.type] : 'white'};
-    //   border: 1px solid #ccc;
-    //   box-shadow: 
-    //     -2rem 2rem 2rem rgba(black, 0.2);
-    //   filter: blur(0);
-    //   border-radius: 10px;
-    //   border: 5px solid blue;
-    // `
 
-    // 'ItemApple1': {
-    //   name: 'Apple',
-    //   type: 'item',
-    //   image: 'apple',
-    //   flavor: 'a ripe, juicy apple',
     //   event: {
+    //     title: 'An Apple',
+    //     image: 'apple',
     //     text: 'You come across an apple on the ground!',
-    //     buttons: ['Take', 'Discard'],
-    //     effects: [['GetItem', 'Apple'], ['end']],
-    //   },
-    // },
+    //     buttons: [
+    //       {
+    //         name: 'Take',
+    //         effects: [
+    //           ['GetItem', 'apple']
+    //         ]
+    //       },
+    //       {
+    //         name: 'Discard',
+    //         effects: [
+    //           ['EndEvent']
+
     return (
       <EventModalDisplay id="modal">
         {this.props.system.event != null && 
@@ -56,8 +47,8 @@ class EventModal extends React.Component {
           <h2>{this.props.system.event.name}</h2>
           <p>{this.props.system.event.flavor}</p>
           <p>{this.props.system.event.effectDescription}</p>
-          {this.props.system.event.type == 'consumable' ? <UseButton onClick={this.useItem}>Use</UseButton> : null }
-          <DiscardButton onClick={this.discardItem}>Discard</DiscardButton>
+          {this.props.system.event.type === 'consumable' ? <Button onClick={this.useItem}>Use</Button> : null }
+          <Button onClick={this.discardItem}>Discard</Button>
           </>
       }
       </EventModalDisplay>

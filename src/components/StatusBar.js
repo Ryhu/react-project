@@ -9,7 +9,7 @@ class StatusBar extends Component {
 
   dropped = event => {
     event.preventDefault()
-    if (this.props.system.dragItem && this.props.system.dragItem.item.type == 'consumable') {
+    if (this.props.system.dragItem && this.props.system.dragItem.item.type === 'consumable') {
       if(this.props.system.dragItem.item.HPUp){
         this.props.IncreaseHP(this.props.system.dragItem.item.HPUp)
       }

@@ -18,7 +18,7 @@ class FieldCard extends Component {
           <p>{this.props.card.type}</p>
           <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
           <p>{this.props.card.flavor}</p>
-          { this.props.card.type == 'item'
+          { this.props.card.type === 'item'
             ? <ItemPickupButton onClick={this.getItem}>Pick Up</ItemPickupButton>
             : null }
         </StyledFieldCard>
