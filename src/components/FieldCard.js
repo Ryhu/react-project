@@ -13,7 +13,7 @@ class FieldCard extends Component {
   render() {
     return (
       this.props.card 
-      ? <StyledFieldCard onClick={() => {this.props.TriggerEvent(this.props.card)}}>
+      ? <StyledFieldCard onClick={() => {this.props.TriggerEvent(this.props.card.event, this.props.fieldIndex)}}>
           <p>{this.props.card.name}</p>
           <p>{this.props.card.type}</p>
           <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
@@ -22,7 +22,7 @@ class FieldCard extends Component {
             ? <ItemPickupButton onClick={this.getItem}>Pick Up</ItemPickupButton>
             : null }
         </StyledFieldCard>
-      : <StyledFieldCard></StyledFieldCard>
+      : <EmptyCard></EmptyCard>
     )
   }
 }
@@ -32,6 +32,15 @@ const ItemPickupButton = styled.button`
 `
 const StyledFieldCard = styled.div`
   background-color: red;
+  width: 240px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 1rem;
+`
+const EmptyCard = styled.div`
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url('./card_back.png');
   width: 240px;
   height: 300px;
   padding: 10px;
@@ -49,7 +58,7 @@ const mapDispatchToProps = dispatch => {
   return {
     DeleteField: (fieldIndex) => dispatch({ type: 'DELETE_FIELD', fieldIndex: fieldIndex }),
     GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
-    TriggerEvent: (event) => dispatch({ type: 'TRIGGER_EVENT', event: event }),
+    TriggerEvent: (event, fieldIndex) => dispatch({ type: 'TRIGGER_EVENT', event: event, fieldIndex: fieldIndex }),
   };
 };
  
