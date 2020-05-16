@@ -5,7 +5,6 @@ export default function StatusReducer(
     Hunger: 10,
     HungerMax: 100,
     Coins: 10,
-    Event: false,
   },
   action
 ) {
@@ -25,6 +24,17 @@ export default function StatusReducer(
         ...state,
         Hunger: state.Hunger + action.amount > state.HungerMax ? state.HungerMax : state.Hunger + action.amount
       }
+    case 'DECREASE_HUNGER':
+      return state.Hunger - action.amount > 0
+        ? {
+          ...state,
+          Hunger: state.Hunger - action.amount > 0 
+        }
+        : {
+          ...state,
+          HP: state.HP + state.Hunger - action.amount,
+          Hunger: 0
+        }
     default:
       return state;
   }

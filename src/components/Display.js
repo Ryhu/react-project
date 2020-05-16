@@ -11,7 +11,7 @@ class Display extends Component {
     console.log(this.props)
     return (
       <DisplayContainer >
-        {this.props.system.event !== null
+        {this.props.fields.event !== null
           ? <EventModal />
           : <Field />}
         <InventoryAndStatus className="invstatus">
@@ -41,6 +41,6 @@ const InventoryAndStatus = styled.div`
   float: right;
 `
 
-const mapStateToProps = (state) => ({system: state.system});
+const mapStateToProps = (state) => ({fields: state.fields});
  
 export default connect(mapStateToProps)(Display);
