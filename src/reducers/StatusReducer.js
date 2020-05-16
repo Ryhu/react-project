@@ -28,12 +28,12 @@ export default function StatusReducer(
       return state.Hunger - action.amount > 0
         ? {
           ...state,
-          Hunger: state.Hunger - action.amount > 0 
+          Hunger: state.Hunger - action.amount,
         }
         : {
           ...state,
           HP: state.HP + state.Hunger - action.amount,
-          Hunger: 0
+          Hunger: 0,
         }
     default:
       return state;

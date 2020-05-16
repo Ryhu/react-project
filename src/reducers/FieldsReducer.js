@@ -1,9 +1,10 @@
 export default function FieldsReducer(
   state = {
     event: null,
-    leftField: [fields.ItemApple1, fields.ItemPotion1],
-    centerField: [fields.ItemPotion1, fields.ItemApple1],
-    rightField : [fields.ItemBread1, fields.ItemPotion1],
+    activeField: null,
+    leftField: [],
+    centerField: [],
+    rightField : [],
   },
   action
 ) {
@@ -13,24 +14,29 @@ export default function FieldsReducer(
     case 'TRIGGER_EVENT':
       return {
         ...state,
-       event: action.event
+       event: action.event,
+       activeField: action.fieldIndex,
       }
-    case 'END_EVENT':
+    case 'CONTINUE_EVENT':
       return {
         ...state,
-        event: null
+        event: events[action.eventIndex],
       }
-    case 'DELETE_FIELD':
+    case 'END_EVENT':
+      console.log(state)
       tempState = {
         leftField: [...state.leftField],
         centerField: [...state.centerField],
         rightField: [...state.rightField],
       }
-      tempState[action.fieldIndex] = tempState[action.fieldIndex].slice(1)
+      tempState[state.activeField] = tempState[state.activeField].slice(1)
       return {
+        ...state,
         leftField: tempState.leftField,
         centerField: tempState.centerField,
         rightField: tempState.rightField,
+        activeField: null,
+        event: null,
       }
     case 'RANDOMIZED_SETUP':
       // amount-card ammount per pile, 
@@ -55,58 +61,139 @@ export default function FieldsReducer(
   }
 }
 
+let events = {
+  ItemApple1: {
+    title: 'An Apple',
+    image: 'apple',
+    text: 'You come across an apple on the ground!',
+    buttons: [
+      {
+        name: 'Take',
+        effects: [
+          ['GetItem', 'Apple'],
+          ['EndEvent']
+        ]
+      },
+      {
+        name: 'Discard',
+        effects: [
+          ['EndEvent']
+        ]
+      },
+    ]
+  },
+  ItemPotion1: {
+    title: 'A Potion',
+    image: 'Potion',
+    text: 'You come across an Potion on the ground!',
+    buttons: [
+      {
+        name: 'Take',
+        effects: [
+          ['GetItem', 'Potion'],
+          ['EndEvent']
+        ]
+      },
+      {
+        name: 'Discard',
+        effects: [
+          ['EndEvent']
+        ]
+      },
+    ]
+  },
+  ItemBread1: {
+    title: 'A Bread',
+    image: 'Bread',
+    text: 'You come across an Bread on the ground!',
+    buttons: [
+      {
+        name: 'Take',
+        effects: [
+          ['GetItem', 'Bread'],
+          ['EndEvent']
+        ]
+      },
+      {
+        name: 'Discard',
+        effects: [
+          ['EndEvent']
+        ]
+      },
+    ]
+  },
+  EventTrapPitfall1_1: {
+    title: 'ITS A TRAP!',
+    image: 'kobold',
+    text: 'As you take a step forward, you get this eerie feeling before your foot touches the ground. Do you throw yourself sidedays (uses 5 energy) at the last moment, or continue the step?',
+    buttons: [
+      {
+        name: 'Dodge',
+        effects: [
+          ['ContinueEvent', 'EventTrapPitfall1_2'],
+        ]
+      },
+      {
+        name: 'Step forward',
+        effects: [
+          ['ContinueEvent', 'EventTrapPitfall1_3'],
+        ]
+      },
+    ]
+  },
+  EventTrapPitfall1_2: {
+    title: 'ITS A TRAP!',
+    image: 'kobold',
+    text: 'Using 5 points of stamina, you throw yourself sideways. After picking yourself up, you poke at the ground you would have stepped with it stick. The earth gives way and reveals a massive hole, at least 5 feet deep. Good thing you avoided that!',
+    buttons: [
+      {
+        name: 'Continue',
+        effects: [
+          ['DecreaseHunger', 5],
+          ['EndEvent']
+        ]
+      },
+    ]
+  },
+  EventTrapPitfall1_3: {
+    title: 'ITS A TRAP!',
+    image: 'kobold',
+    text: 'Ignoring your instincts, you step forward anyway. What kind of idiot would throw take such a drastic measure for a stupid suspicion, anyway? You feel nothing as your foot touches the earth in front of you, and continue feeling nothing as the earth opens up and you plunge into the very well made pitfall trap, taking 10 damage.',
+    buttons: [
+      {
+        name: 'Continue',
+        effects: [
+          ['DecreaseHP', 10],
+          ['EndEvent']
+        ]
+      },
+    ]
+  },
+}
+
 let fields = {
   'ItemApple1': {
     name: 'Apple',
     image: 'apple',
     flavor: 'a ripe, juicy apple',
-    event: {
-      title: 'An Apple',
-      image: 'apple',
-      text: 'You come across an apple on the ground!',
-      buttons: [
-        {
-          name: 'Take',
-          effects: [
-            ['GetItem', 'apple']
-          ]
-        },
-        {
-          name: 'Discard',
-          effects: [
-            ['EndEvent']
-          ]
-        },
-      ]
-    },
+    event: events.ItemApple1,
   },
-  // 'EventTrap1': {
-  //   name: 'Suspicious grass',
-  //   type: 'event',
-  //   image: '',
-  //   flavor: 'somethings not quite right',
-  //   event: {
-  //     text: 'You come across an apple on the ground!',
-  //     buttons: ['Take', 'Discard'],
-  //     effects: [['getItem', 'Apple'], ['end']],
-  //   },
-  // },
-  // 'ItemPotion1': {
-  //   name: 'Potion',
-  //   type: 'item',
-  //   image: 'potion',
-  //   flavor: 'a potion made of red herbs',
-  //   effectDescription: 'heals 50 HP',
-  //   recoverAmount: 50,
-  //   itemIndex: 'Potion',
-  // },
-  // 'ItemBread1': {
-  //   name: 'Bread',
-  //   type: 'item',
-  //   image: 'bread',
-  //   flavor: 'made of bread.',
-  //   effectDescription: 'heals 20 HP',
-  //   recoverAmount: 20,
-  //   itemIndex: 'Bread',
-  // }
-}
+  'ItemPotion1': {
+    name: 'Potion',
+    image: 'Potion',
+    flavor: 'a Potion on the ground',
+    event: events.ItemPotion1,
+  },
+  'ItemBread1': {
+    name: 'Bread',
+    image: 'Bread',
+    flavor: 'a Bread on the ground',
+    event: events.ItemBread1,
+  },
+  'EventTrapPitfall1_1': {
+    name: 'Suspicious grass',
+    image: 'kobold',
+    flavor: 'somethings not quite right here...',
+    event: events.EventTrapPitfall1_1,
+  } 
+}; 

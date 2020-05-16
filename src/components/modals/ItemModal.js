@@ -76,7 +76,8 @@ const IconSpan = styled.span`
 const Icon = styled.img`
   height: 1.1rem;
   width: 1.1rem;
-  margin-right: .3rem;
+  padding-left: .1rem;
+  padding-right: .3rem;
 `
 const CloseButton = styled.p`
   text-align: right;

@@ -3,23 +3,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux'; 
 
 class EventModal extends React.Component {
-  onClose = event => {
-    this.props.onClose && this.props.onClose(event);
-  };
 
-  useItem = () => {
-    this.onClose()
-    if(this.props.item.HPUp){
-      this.props.IncreaseHP(this.props.item.HPUp)
-    }
-    if(this.props.item.HungerUp){
-      this.props.IncreaseHunger(this.props.item.HungerUp)
-    }
-    this.props.DeleteItem(this.props.inventoryIndex)
-  }
-  discardItem(){
-    this.onClose()
-    this.props.DeleteItem(this.props.inventoryIndex)
+  buttonEffect(button){
+    button.effects.forEach(effect => {
+      this.props[effect[0]](...effect.slice(1))
+    })
   }
 
   render() {
@@ -32,23 +20,23 @@ class EventModal extends React.Component {
     //       {
     //         name: 'Take',
     //         effects: [
-    //           ['GetItem', 'apple']
+    //           ['GetItem', 'Apple']
     //         ]
     //       },
     //       {
     //         name: 'Discard',
     //         effects: [
     //           ['EndEvent']
-
+    let event = this.props.fields.event;
     return (
       <EventModalDisplay id="modal">
-        {this.props.system.event != null && 
+        {event != null && 
           <>
-          <h2>{this.props.system.event.name}</h2>
-          <p>{this.props.system.event.flavor}</p>
-          <p>{this.props.system.event.effectDescription}</p>
-          {this.props.system.event.type === 'consumable' ? <Button onClick={this.useItem}>Use</Button> : null }
-          <Button onClick={this.discardItem}>Discard</Button>
+          <h2>{event.title}</h2>
+          <Text>{event.text}</Text>
+          { event.buttons.map(button => (
+            <Button onClick={() => this.buttonEffect(button)}>{button.name}</Button>
+          ))}
           </>
       }
       </EventModalDisplay>
@@ -56,6 +44,9 @@ class EventModal extends React.Component {
   }
 }
 
+const Text = styled.p`
+  display: block;
+`
 const EventModalDisplay = styled.div`
   height: 20rem;
   width: 60rem;
@@ -75,13 +66,17 @@ const ItemImage = styled.img`
   padding: 10px;
 `
 
-const mapStateToProps = (state) => ({status: state.status, system: state.system});
+const mapStateToProps = (state) => ({status: state.status, fields: state.fields});
 
 const mapDispatchToProps = dispatch => {
   return {
     IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
     IncreaseHunger: (amount) => dispatch({ type: 'INCREASE_HUNGER', amount: amount }),
-    DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
+    DecreaseHP: (amount) => dispatch({ type: 'DECREASE_HP', amount: amount }),
+    DecreaseHunger: (amount) => dispatch({ type: 'DECREASE_HUNGER', amount: amount }),
+    GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
+    EndEvent: () => dispatch({ type: "END_EVENT" }),
+    ContinueEvent: (eventIndex) => dispatch({ type: 'CONTINUE_EVENT', eventIndex: eventIndex }),
   };
 };
  
