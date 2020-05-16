@@ -46,8 +46,8 @@ const EmptyCard = styled.div`
   padding: 10px;
 `
 const CardImage = styled.img`
-  max-height: 100px;
-  max-width: 100px;
+  height: 100px;
+  width: 100px;
   border: 1px solid grey;
   padding: 10px;
 `

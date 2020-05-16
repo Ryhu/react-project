@@ -50,6 +50,8 @@ export default function FieldsReducer(
         tempState[fieldIndex] = [...tempField]
         tempField = []
       })
+      tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
+
       return {
         ...state,
         leftField: [...tempState.leftField],
@@ -118,6 +120,19 @@ let events = {
         name: 'Discard',
         effects: [
           ['EndEvent']
+        ]
+      },
+    ]
+  },
+  ExitForest: {
+    title: 'An Exit!',
+    image: 'Exit',
+    text: 'The forest clears up, revealing an opening in the trees and a weathered road leading out of the forest.',
+    buttons: [
+      {
+        name: 'Continue',
+        effects: [
+          ['LeaveDungeon'],
         ]
       },
     ]
@@ -195,5 +210,17 @@ let fields = {
     image: 'kobold',
     flavor: 'somethings not quite right here...',
     event: events.EventTrapPitfall1_1,
-  } 
+  },
+  'EventTrapPitfall1_1': {
+    name: 'Suspicious grass',
+    image: 'kobold',
+    flavor: 'somethings not quite right here...',
+    event: events.EventTrapPitfall1_1,
+  },
+  'ExitForest': {
+    name: 'An Exit',
+    image: 'exit',
+    flavor: 'A way out!',
+    event: events.ExitForest,
+  }
 }; 
