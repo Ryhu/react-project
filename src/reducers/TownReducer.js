@@ -1,6 +1,8 @@
 export default function TownReducer(
   state = {
-    dragItem: null
+    yorne: {
+
+    }
   },
   action
 ) {
@@ -17,5 +19,19 @@ export default function TownReducer(
       }
     default:
       return state;
+  }
+}
+
+let towns = {
+  yorne: {
+    name: 'Yorne',
+    backgroundImage: '',
+    shop: {
+      supply: ['apple'],
+      demand: [],
+    },
+    exits: [],
+    villagers:[],
+    quests: [],
   }
 }
