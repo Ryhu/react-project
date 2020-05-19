@@ -1,21 +1,15 @@
 export default function TownReducer(
   state = {
-    yorne: {
-
-    }
+    activeLocation: 'townSquare',
+    town: towns.yorne,
   },
   action
 ) {
   switch (action.type) {
-    case 'DRAG_START':
+    case 'SET_LOCATION':
       return {
         ...state,
-        dragItem: action.item
-      }
-    case 'DRAG_END':
-      return {
-        ...state,
-        dragItem: null
+        activeLocation: action.location
       }
     default:
       return state;

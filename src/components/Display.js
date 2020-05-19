@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Field from './Field.js'
+import Town from './Town.js'
 import Inventory from './Inventory.js'
 import StatusBar from './StatusBar.js'
 import EventModal from './modals/EventModal.js'
@@ -12,12 +13,15 @@ class Display extends Component {
   }
   
   render() {
-    console.log(this.props)
+    console.log(this.props.system.mode)
     return (
       <DisplayContainer >
         {this.props.fields.event !== null
           ? <EventModal />
-          : <Field />}
+          : <>
+              { this.props.system.mode === 'dungeon' ? <Field />: <Town /> }
+            </>
+        }
         <InventoryAndStatus className="invstatus">
           <StatusBar />
           <Inventory />
@@ -45,7 +49,7 @@ const InventoryAndStatus = styled.div`
   float: right;
 `
 
-const mapStateToProps = (state) => ({fields: state.fields});
+const mapStateToProps = (state) => ({fields: state.fields, system: state.system,});
 
 const mapDispatchToProps = dispatch => {
   return {
