@@ -24,7 +24,7 @@ let towns = {
       supply: ['apple'],
       demand: [],
     },
-    exits: [],
+    exits: ['Yornewood'],
     villagers:[],
     quests: [],
   }

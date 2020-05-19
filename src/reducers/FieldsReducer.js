@@ -1,6 +1,10 @@
 import fields from '../data/fields'
 import events from '../data/events'
 
+// WIP: THE GREAT RENAMING:
+// merge dungeon reducer with fieldsReducer, named dungeonreducer
+// move events to system, events apply to dungeons and towns
+
 export default function FieldsReducer(
   state = {
     event: null,
@@ -8,12 +12,38 @@ export default function FieldsReducer(
     leftField: [],
     centerField: [],
     rightField : [],
+    dungeon: {
+      name: 'Yornewood',
+      rooms: {
+        'The Bramble': {
+          fields: {
+
+          }
+        },
+        'Heart of the Forest': {
+          fields: {
+            
+          }
+        },
+        'The Thinning of Trees': {
+          fields: {
+            
+          }
+        }
+      },
+      exits: ['Yorne'],
+    }
   },
   action
 ) {
   let tempField
   let tempState
   switch (action.type) {
+    case 'ENTER_DUNGEON': 
+      return {
+        ...state,
+        dungeon: this.dungeons[action.dungeon],
+      }
     case 'TRIGGER_EVENT':
       return {
         ...state,

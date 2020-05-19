@@ -67,7 +67,8 @@ let events = {
       {
         name: 'Continue',
         effects: [
-          ['LeaveDungeon'],
+          ['SetModeTown'],
+          ['EndEvent'],
         ]
       },
     ]
