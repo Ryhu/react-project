@@ -9,13 +9,13 @@ let fields = {
   },
   'ItemPotion1': {
     name: 'Potion',
-    image: 'Potion',
+    image: 'potion',
     flavor: 'a Potion on the ground',
     event: events.ItemPotion1,
   },
   'ItemBread1': {
     name: 'Bread',
-    image: 'Bread',
+    image: 'bread',
     flavor: 'a Bread on the ground',
     event: events.ItemBread1,
   },
