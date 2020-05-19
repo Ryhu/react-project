@@ -25,12 +25,6 @@ let fields = {
     flavor: 'somethings not quite right here...',
     event: events.EventTrapPitfall1_1,
   },
-  'EventTrapPitfall1_1': {
-    name: 'Suspicious grass',
-    image: 'kobold',
-    flavor: 'somethings not quite right here...',
-    event: events.EventTrapPitfall1_1,
-  },
   'ExitForest': {
     name: 'An Exit',
     image: 'exit',

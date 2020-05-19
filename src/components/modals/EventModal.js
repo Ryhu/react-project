@@ -29,7 +29,7 @@ class EventModal extends React.Component {
     //           ['EndEvent']
     let event = this.props.fields.event;
     return (
-      <EventModalDisplay id="modal">
+      <EventModalDisplay>
         {event != null && 
           <>
           <h2>{event.title}</h2>
@@ -60,12 +60,6 @@ const Button = styled.button`
   border-radius: 5px;
   padding: 1rem;
 `
-const ItemImage = styled.img`
-  max-height: 120px;
-  max-width: 120px;
-  border: 1px solid grey;
-  padding: 10px;
-`
 
 const mapStateToProps = (state) => ({status: state.status, fields: state.fields});
 
@@ -78,6 +72,8 @@ const mapDispatchToProps = dispatch => {
     GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
     EndEvent: () => dispatch({ type: "END_EVENT" }),
     ContinueEvent: (eventIndex) => dispatch({ type: 'CONTINUE_EVENT', eventIndex: eventIndex }),
+    SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
+    SetModeTown: () => dispatch({ type: "SET_MODE_TOWN" }),
   };
 };
  
