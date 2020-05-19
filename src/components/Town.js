@@ -50,7 +50,12 @@ class Town extends React.Component {
         {this.props.town.activeLocation === 'leave' && 
           <>
           <h2>leave</h2>
-          <button onClick={this.props.SetModeDungeon}>Yornewood</button>
+          <BackButton onClick={() => {
+            this.props.SetLocation('townSquare')
+            this.props.SetModeDungeon()
+          }}>Yornewood</BackButton>
+          <br />
+          <br />
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
           </>
         }
