@@ -53,6 +53,7 @@ class Town extends React.Component {
           <BackButton onClick={() => {
             this.props.SetLocation('townSquare')
             this.props.SetModeDungeon()
+            this.props.EnterDungeon('Yornewood')
           }}>Yornewood</BackButton>
           <br />
           <br />
@@ -100,6 +101,7 @@ const mapDispatchToProps = dispatch => {
   return {
     SetLocation: (location) => dispatch({ type: 'SET_LOCATION', location: location }),
     SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
+    EnterDungeon: (location) => dispatch({ type: 'ENTER_DUNGEON', location: location }),
   };
 };
  

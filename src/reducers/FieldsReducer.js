@@ -1,5 +1,6 @@
 import fields from '../data/fields'
 import events from '../data/events'
+import dungeons from '../data/dungeons'
 
 // WIP: THE GREAT RENAMING:
 // merge dungeon reducer with fieldsReducer, named dungeonreducer
@@ -40,9 +41,29 @@ export default function FieldsReducer(
   let tempState
   switch (action.type) {
     case 'ENTER_DUNGEON': 
+      let dungeon = dungeons[action.location]
+      // amount-card ammount per pile, 
+      tempState = {}
+      tempField = []
+      console.log(dungeons)
+      console.log(action.location)
+      console.log(fields)
+      let roomFields = dungeon.rooms[dungeon.entrance].fields
+      let fieldIndxes = ['leftField', 'centerField', 'rightField']
+      fieldIndxes.forEach(fieldIndex => {
+        for(let i = 0;i<5;i++){
+          tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
+        }
+        tempState[fieldIndex] = [...tempField]
+        tempField = []
+      })
+      tempState[fieldIndxes[Math.floor(Math.random() * fieldIndxes.length)]].push(fields.ExitForest)
       return {
         ...state,
-        dungeon: this.dungeons[action.dungeon],
+        leftField: [...tempState.leftField],
+        centerField: [...tempState.centerField],
+        rightField : [...tempState.rightField],
+        dungeon: dungeons[action.location],
       }
     case 'TRIGGER_EVENT':
       return {
