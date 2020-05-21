@@ -9,6 +9,16 @@ export default function StatusReducer(
   action
 ) {
   switch (action.type) {
+    case 'INCREASE_COINS':
+      return {
+        ...state,
+        Coins: state.Coins + action.amount 
+      }
+    case 'DECREASE_COINS':
+      return {
+        ...state,
+        Coins: state.Coins - action.amount 
+      }
     case 'INCREASE_HP':
       return {
         ...state,

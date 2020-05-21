@@ -23,6 +23,12 @@ class ItemModal extends React.Component {
     this.props.DeleteItem(this.props.inventoryIndex)
   }
 
+  sellItem = event => {
+    this.onClose()
+    this.props.IncreaseCoins(this.props.item.gold)
+    this.props.DeleteItem(this.props.inventoryIndex)
+  }
+
   render() {
     const ItemModalDisplay = styled.div`
       top: -16rem;
@@ -51,6 +57,7 @@ class ItemModal extends React.Component {
             {this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan>}
           </EffectsDiv>
           <p>{this.props.item.flavor}</p>
+          {this.props.system.mode === 'town' && this.props.town.activeLocation === 'shop' && <UseButton onClick={this.sellItem}>Sell</UseButton>}
           {this.props.item.type === 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
           <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
         }
@@ -106,13 +113,15 @@ const ItemImage = styled.img`
   padding: 10px;
 `
 
-const mapStateToProps = (state) => ({status: state.status});
+const mapStateToProps = (state) => ({status: state.status, system: state.system, town: state.town});
 
 const mapDispatchToProps = dispatch => {
   return {
     IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
     IncreaseHunger: (amount) => dispatch({ type: 'INCREASE_HUNGER', amount: amount }),
     DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
+    IncreaseCoins: (amount) => dispatch({ type: 'INCREASE_COINS', amount: amount }),
+    DecreaseCoins: (amount) => dispatch({ type: 'DECREASE_COINS', amount: amount }),
   };
 };
  
