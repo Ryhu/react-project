@@ -17,9 +17,12 @@ export default function FieldsReducer(
       name: 'Yornewood',
       rooms: {
         'The Bramble': {
-          fields: {
-
-          }
+          fields: [
+            'ItemApple1', 'ItemBread1', 'ItemPotion1', 'EventTrapPitfall1_1'
+          ],
+          exits: [
+            { event: 'ExitForest', fieldIndex: 'centerField' },
+          ]
         },
         'Heart of the Forest': {
           fields: {
