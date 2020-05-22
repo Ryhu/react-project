@@ -48,11 +48,16 @@ const Text = styled.p`
   display: block;
 `
 const EventModalDisplay = styled.div`
-  height: 30rem;
-  width: 60rem;
+  height: 50rem;
   background-color: green;
   width: 60%;
   font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+  box-sizing: border-box;
 `
 const Button = styled.button`
   font-size: 1.2rem;

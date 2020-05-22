@@ -25,6 +25,7 @@ class Town extends React.Component {
     let town = this.props.town.town;
     return (
       <TownDisplay>
+        <TownContainer>
         <h2>{town.name}</h2>
         {this.props.town.activeLocation === 'townSquare' && 
           <>
@@ -90,17 +91,29 @@ class Town extends React.Component {
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
           </>
         }
+        </TownContainer>
       </TownDisplay>
     );
   }
 }
 
+const TownContainer = styled.div`
+  background-color: green;
+  display: inline-block;
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+`
 const Shop = styled.div`
   margin-left: 30%;
   margin-right: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: green;
+  border-radius: 1rem;
+  padding: 1rem;
 `
 const ShopInventory = styled.div`
   display: flex;
@@ -113,10 +126,14 @@ const BackButton = styled.div`
   background-color: black;
   color: white;
   display: inline-block;
-  padding: .3rem;
+  font-size: 1.4rem;
+  padding: 1rem;
+  border-radius: 1rem;
 `
 const Options = styled.div`
   display: inline-block;
+  font-size: 1.5rem;
+  line-height: 6rem;
 `
 const Row = styled.div`
   display: flex;
@@ -130,6 +147,7 @@ const OptionBlock = styled.div`
   width: 100px;
   background-color: black;
   color: white;
+  border-radius: 1rem;
 `
 const TownDisplay = styled.div`
   padding-top: 20rem;
@@ -137,6 +155,9 @@ const TownDisplay = styled.div`
   width: 60rem;
   background-color: green;
   width: 60%;
+  background-image: url('./town1_background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 `
 
 const mapStateToProps = (state) => ({status: state.status, town: state.town});

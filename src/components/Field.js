@@ -16,11 +16,17 @@ class Field extends Component {
 }
 
 const FieldDisplay = styled.div`
-width: 60%;
+  width: 60%;
+  height: 50rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
   div{
     margin: 5px;
   }
+  background-image: url('./forest_background.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 `
 
 const mapStateToProps = (state) => ({fields: state.fields});
