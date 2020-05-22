@@ -1,5 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
+import InventorySlot from './InventorySlot.js'
+import items from '../data/items'
 import { connect } from 'react-redux'; 
 
 class Town extends React.Component {
@@ -29,12 +31,25 @@ class Town extends React.Component {
           </Options>
           </>
         }
+
+
+
+
+
         {this.props.town.activeLocation === 'shop' && 
-          <>
+          <Shop>
           <h2>shop</h2>
+          <ShopInventory></ShopInventory>
+          <InventorySlot item={items.Apple} type='shop'></InventorySlot>
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
-          </>
+          </Shop>
         }
+
+
+
+
+
+
         {this.props.town.activeLocation === 'quests' && 
           <>
           <h2>quests</h2>
@@ -65,6 +80,18 @@ class Town extends React.Component {
   }
 }
 
+const Shop = styled.div`
+  margin-left: 30%;
+  margin-right: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+const ShopInventory = styled.div`
+  margin-left: 30%;
+  display: flex;
+  align-items: center;
+`
 const BackButton = styled.div`
   background-color: black;
   color: white;
@@ -88,11 +115,11 @@ const OptionBlock = styled.div`
   color: white;
 `
 const TownDisplay = styled.div`
+  padding-top: 20rem;
   height: 30rem;
   width: 60rem;
   background-color: green;
   width: 60%;
-  font-size: 2rem;
 `
 
 const mapStateToProps = (state) => ({status: state.status, town: state.town});

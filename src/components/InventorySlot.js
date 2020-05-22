@@ -75,6 +75,7 @@ class InventorySlot extends Component {
               item={this.props.item} 
               onClose={this.showModal} 
               inventoryIndex={this.props.inventoryIndex} 
+              type={this.props.type || null}
             /> 
           </Anchor>
         </CSSTransition>

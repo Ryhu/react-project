@@ -29,6 +29,15 @@ class ItemModal extends React.Component {
     this.props.DeleteItem(this.props.inventoryIndex)
   }
 
+  buyItem = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    if(this.props.inventory.backpack.indexOf(null) >= 0 && this.props.status.Coins >= this.props.item.gold * 2) {
+      this.props.DecreaseCoins(this.props.item.gold * 2)
+      this.props.GetItem(this.props.item.name)
+    }
+  }
+
   render() {
     const ItemModalDisplay = styled.div`
       top: -16rem;
@@ -57,9 +66,17 @@ class ItemModal extends React.Component {
             {this.props.item.gold && <IconSpan>{this.props.item.gold}<Icon src='./coins.png'></Icon></IconSpan>}
           </EffectsDiv>
           <p>{this.props.item.flavor}</p>
-          {this.props.system.mode === 'town' && this.props.town.activeLocation === 'shop' && <UseButton onClick={this.sellItem}>Sell</UseButton>}
-          {this.props.item.type === 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
-          <DiscardButton onClick={this.discardItem}>Discard</DiscardButton></>
+          {this.props.type === 'shop'
+            ? <>
+                <DiscardButton onClick={this.buyItem}>{this.props.item.gold * 2}<Icon src='./coins.png'></Icon></DiscardButton>
+              </>
+            : <>
+                {this.props.system.mode === 'town' && this.props.town.activeLocation === 'shop' && <UseButton onClick={this.sellItem}>Sell</UseButton>}
+                {this.props.item.type === 'consumable' && <UseButton onClick={this.useItem}>Use</UseButton>}
+                <DiscardButton onClick={this.discardItem}>Discard</DiscardButton>
+              </>
+          } 
+        </>
         }
       </ItemModalDisplay>
     );
@@ -113,12 +130,14 @@ const ItemImage = styled.img`
   padding: 10px;
 `
 
-const mapStateToProps = (state) => ({status: state.status, system: state.system, town: state.town});
+// TODO potentially dont need system
+const mapStateToProps = (state) => ({status: state.status, system: state.system, town: state.town, inventory: state.inventory});
 
 const mapDispatchToProps = dispatch => {
   return {
     IncreaseHP: (amount) => dispatch({ type: 'INCREASE_HP', amount: amount }),
     IncreaseHunger: (amount) => dispatch({ type: 'INCREASE_HUNGER', amount: amount }),
+    GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
     DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
     IncreaseCoins: (amount) => dispatch({ type: 'INCREASE_COINS', amount: amount }),
     DecreaseCoins: (amount) => dispatch({ type: 'DECREASE_COINS', amount: amount }),
