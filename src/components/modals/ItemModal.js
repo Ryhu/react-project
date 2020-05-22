@@ -46,7 +46,6 @@ class ItemModal extends React.Component {
       width: 18rem;
       height: 25rem;
       background: ${this.props.item ? colorDictionary[this.props.item.type] : 'white'};
-      border: 1px solid #ccc;
       box-shadow: 
         -2rem 2rem 2rem rgba(black, 0.2);
       filter: blur(0);

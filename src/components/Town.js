@@ -42,13 +42,6 @@ class Town extends React.Component {
           </Options>
           </>
         }
-
-
-
-
-
-
-
         {this.props.town.activeLocation === 'shop' && 
           <Shop>
           <h2>shop</h2>
@@ -60,12 +53,6 @@ class Town extends React.Component {
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
           </Shop>
         }
-
-
-
-
-
-
         {this.props.town.activeLocation === 'quests' && 
           <>
           <h2>quests</h2>
@@ -81,11 +68,13 @@ class Town extends React.Component {
         {this.props.town.activeLocation === 'leave' && 
           <>
           <h2>leave</h2>
-          <BackButton onClick={() => {
-            this.props.SetLocation('townSquare')
-            this.props.SetModeDungeon()
-            this.props.EnterDungeon('Yornewood')
-          }}>Yornewood</BackButton>
+          <DungeonCard onClick={() => {
+              this.props.SetLocation('townSquare')
+              this.props.SetModeDungeon()
+              this.props.EnterDungeon('Yornewood')
+            }}>
+            <BackButton>Yornewood</BackButton>
+          </DungeonCard>
           <br />
           <br />
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
@@ -97,6 +86,15 @@ class Town extends React.Component {
   }
 }
 
+const DungeonCard = styled.div`
+  height: 10rem;
+  width: 15rem;
+  background-image: url('./forest_background.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`
 const TownContainer = styled.div`
   background-color: green;
   display: inline-block;
@@ -104,6 +102,7 @@ const TownContainer = styled.div`
   border-radius: 1rem;
   padding: 1rem;
   box-sizing: border-box;
+  border: 2px solid yellow;
 `
 const Shop = styled.div`
   margin-left: 30%;
