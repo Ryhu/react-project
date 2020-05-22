@@ -21,7 +21,7 @@ let towns = {
     name: 'Yorne',
     backgroundImage: '',
     shop: {
-      supply: ['apple', 'bread'],
+      supply: ['Apple', 'Bread', 'Potion', 'Rock'],
       demand: [],
     },
     exits: ['Yornewood'],

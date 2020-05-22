@@ -4,7 +4,7 @@ export default function StatusReducer(
     HPMax: 200,
     Hunger: 10,
     HungerMax: 100,
-    Coins: 10,
+    Coins: 100,
   },
   action
 ) {

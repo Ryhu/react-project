@@ -11,6 +11,16 @@ class Town extends React.Component {
   // take quests
   // leave town
 
+  // name: 'Yorne',
+  //   backgroundImage: '',
+  //   shop: {
+  //     supply: ['apple', 'bread'],
+  //     demand: [],
+  //   },
+  //   exits: ['Yornewood'],
+  //   villagers:[],
+  //   quests: [],
+
   render() {
     let town = this.props.town.town;
     return (
@@ -36,11 +46,16 @@ class Town extends React.Component {
 
 
 
+
+
         {this.props.town.activeLocation === 'shop' && 
           <Shop>
           <h2>shop</h2>
-          <ShopInventory></ShopInventory>
-          <InventorySlot item={items.Apple} type='shop'></InventorySlot>
+          <ShopInventory>
+            {town.shop.supply.map((itemIndex, index) => (
+              <InventorySlot item={items[itemIndex]} type='shop' inventoryIndex={100 + index}></InventorySlot>
+            ))}
+          </ShopInventory>
           <BackButton onClick={() => this.props.SetLocation('townSquare')}>Back</BackButton>
           </Shop>
         }
@@ -88,9 +103,11 @@ const Shop = styled.div`
   flex-direction: column;
 `
 const ShopInventory = styled.div`
-  margin-left: 30%;
   display: flex;
   align-items: center;
+  div:nth-child(n) {
+    margin: .5rem;
+  }
 `
 const BackButton = styled.div`
   background-color: black;
