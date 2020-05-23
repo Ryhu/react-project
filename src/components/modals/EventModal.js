@@ -28,28 +28,37 @@ class EventModal extends React.Component {
     //         effects: [
     //           ['EndEvent']
     let event = this.props.fields.event;
+    let backgroundURL = '';
     return (
       <EventModalDisplay>
-        {event != null && 
-          <>
-          <h2>{event.title}</h2>
-          <Text>{event.text}</Text>
-          { event.buttons.map(button => (
-            <Button onClick={() => this.buttonEffect(button)}>{button.name}</Button>
-          ))}
-          </>
-      }
+        <EventContainer>
+          {event != null && 
+            <>
+            <h2>{event.title}</h2>
+            <Text>{event.text}</Text>
+            { event.buttons.map(button => (
+              <Button onClick={() => this.buttonEffect(button)}>{button.name}</Button>
+            ))}
+            </>
+          }
+        </EventContainer>
       </EventModalDisplay>
     );
   }
 }
 
+const EventContainer = styled.div`
+  display: block;
+  background-color: green;
+  border: 1px solid yellow;
+  border-radius: 1rem;
+  padding: 1rem;
+`
 const Text = styled.p`
   display: block;
 `
 const EventModalDisplay = styled.div`
   height: 50rem;
-  background-color: green;
   width: 60%;
   font-size: 2rem;
   display: flex;
@@ -58,6 +67,9 @@ const EventModalDisplay = styled.div`
   align-items: center;
   padding: 5rem;
   box-sizing: border-box;
+  background-image: url('./forest_background.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 `
 const Button = styled.button`
   font-size: 1.2rem;
