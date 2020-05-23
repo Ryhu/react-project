@@ -56,8 +56,7 @@ class InventorySlot extends Component {
           unmountOnExit
         >
           <ItemImage  
-            draggable 
-            onDragStart={this.startDrag}
+            onDragStart={this.props.type === 'shop' ? null : this.startDrag}
             onDragEnd={this.props.DragEnd}
             className={this.props.item ? '' : 'hidden'}
             src={this.props.item ? './' + this.props.item.image + '.png' : null}>
