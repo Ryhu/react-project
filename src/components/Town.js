@@ -21,6 +21,20 @@ class Town extends React.Component {
   //   villagers:[],
   //   quests: [],
 
+  dragOver = event => {
+    event.preventDefault();
+  }
+
+  dropped = event => {
+    event.preventDefault()
+    if (this.props.system.dragItem) {
+      this.props.DeleteItem(this.props.system.dragItem.inventoryIndex)
+      this.props.IncreaseCoins(this.props.system.dragItem.item.gold)
+      this.props.DragEnd()
+      event.stopPropagation()
+    }
+  }
+
   render() {
     let town = this.props.town.town;
     return (
@@ -33,10 +47,10 @@ class Town extends React.Component {
           <Options>
             <Row>
               <OptionBlock onClick={() => this.props.SetLocation('shop')}>shop</OptionBlock>
-              <OptionBlock onClick={() => this.props.SetLocation('quests')}>quests</OptionBlock>
+              {/* <OptionBlock onClick={() => this.props.SetLocation('quests')}>quests</OptionBlock> */}
             </Row>
             <Row>
-              <OptionBlock onClick={() => this.props.SetLocation('talk')}>talk</OptionBlock>
+              {/* <OptionBlock onClick={() => this.props.SetLocation('talk')}>talk</OptionBlock> */}
               <OptionBlock onClick={() => this.props.SetLocation('leave')}>leave</OptionBlock>
             </Row>
           </Options>
@@ -45,7 +59,10 @@ class Town extends React.Component {
         {this.props.town.activeLocation === 'shop' && 
           <Shop>
           <h2>shop</h2>
-          <ShopInventory>
+          <ShopInventory
+            onDrop={this.dropped}
+            onDragOver={this.dragOver}
+          >
             {town.shop.supply.map((itemIndex, index) => (
               <InventorySlot item={items[itemIndex]} type='shop' inventoryIndex={100 + index}></InventorySlot>
             ))}
@@ -120,6 +137,11 @@ const ShopInventory = styled.div`
   div:nth-child(n) {
     margin: .5rem;
   }
+  border: 2px solid blue;
+  border-radius: .7rem;
+  padding: .5rem;
+  margin-bottom: 1rem;
+  background-color: #c68c53;
 `
 const BackButton = styled.div`
   background-color: black;
@@ -159,13 +181,16 @@ const TownDisplay = styled.div`
   background-size: 100% 100%;
 `
 
-const mapStateToProps = (state) => ({status: state.status, town: state.town});
+const mapStateToProps = (state) => ({status: state.status, town: state.town, system: state.system});
 
 const mapDispatchToProps = dispatch => {
   return {
     SetLocation: (location) => dispatch({ type: 'SET_LOCATION', location: location }),
     SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
     EnterDungeon: (location) => dispatch({ type: 'ENTER_DUNGEON', location: location }),
+    DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
+    IncreaseCoins: (amount) => dispatch({ type: 'INCREASE_COINS', amount: amount }),
+    DragEnd: () => dispatch({ type: 'DRAG_END' }),
   };
 };
  

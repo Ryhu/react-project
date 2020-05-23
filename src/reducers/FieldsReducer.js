@@ -48,9 +48,6 @@ export default function FieldsReducer(
       // amount-card ammount per pile, 
       tempState = {}
       tempField = []
-      console.log(dungeons)
-      console.log(action.location)
-      console.log(fields)
       let roomFields = dungeon.rooms[dungeon.entrance].fields
       let fieldIndxes = ['leftField', 'centerField', 'rightField']
       fieldIndxes.forEach(fieldIndex => {
