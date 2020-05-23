@@ -88,12 +88,15 @@ const InventorySlotDisplay = styled.div`
   width: 4rem;
   display: flex;
   border: 2px solid grey;
+  :hover{
+    cursor: pointer;
+  }
 `
 const ItemImage = styled.img`
-height: 3.5rem;
-width: 3.5rem;
-padding: .25rem;
-position: relative;
+  height: 3.5rem;
+  width: 3.5rem;
+  padding: .25rem;
+  position: relative;
   &.fade-enter {
     top: -40px;
     opacity: 0;
@@ -112,7 +115,7 @@ position: relative;
   }
 `
 const Anchor = styled.div`
-position: relative;
+  position: relative;
   width: 1px;
   height: 1px;
   &.fade-enter {

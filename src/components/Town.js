@@ -121,12 +121,14 @@ const DungeonCard = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
+  border: 2px solid black;
+  border-radius: 1rem;
 `
 const TownContainer = styled.div`
   background-color: green;
   display: inline-block;
   width: 50%;
-  border-radius: 1rem;
+  border-radius: 2rem;
   padding: 1rem;
   box-sizing: border-box;
   border: 2px solid yellow;

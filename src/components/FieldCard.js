@@ -8,8 +8,6 @@ class FieldCard extends Component {
     this.props.DeleteField(this.props.fieldIndex)
   }
 
-
-
   render() {
     return (
       this.props.card 
@@ -38,12 +36,13 @@ const StyledFieldCard = styled.div`
   border-radius: 1rem;
 `
 const EmptyCard = styled.div`
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-image: url('./card_back.png');
-  width: 240px;
-  height: 300px;
-  padding: 10px;
+  display: none;
+  // background-repeat: no-repeat;
+  // background-size: 100% 100%;
+  // background-image: url('./card_back.png');
+  // width: 240px;
+  // height: 300px;
+  // padding: 10px;
 `
 const CardImage = styled.img`
   height: 100px;
