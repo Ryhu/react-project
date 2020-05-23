@@ -77,7 +77,6 @@ export default function FieldsReducer(
         event: events[action.eventIndex],
       }
     case 'END_EVENT':
-      console.log(state)
       tempState = {
         leftField: [...state.leftField],
         centerField: [...state.centerField],

@@ -13,7 +13,6 @@ class Display extends Component {
   }
   
   render() {
-    console.log(this.props.system.mode)
     return (
       <DisplayContainer >
         {this.props.fields.event !== null
