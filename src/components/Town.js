@@ -39,8 +39,8 @@ class Town extends React.Component {
     let town = this.props.town.town;
     return (
       <TownDisplay>
+        <TownTitle>{town.name}</TownTitle>
         <TownContainer>
-        <h2>{town.name}</h2>
         {this.props.town.activeLocation === 'townSquare' && 
           <>
           <h2>Town Square</h2>
@@ -58,7 +58,7 @@ class Town extends React.Component {
         }
         {this.props.town.activeLocation === 'shop' && 
           <Shop>
-          <h2>shop</h2>
+          <h2>Shop</h2>
           <ShopInventory
             onDrop={this.dropped}
             onDragOver={this.dragOver}
@@ -84,7 +84,7 @@ class Town extends React.Component {
         }
         {this.props.town.activeLocation === 'leave' && 
           <>
-          <h2>leave</h2>
+          <h2>Leave</h2>
           <DungeonCard onClick={() => {
               this.props.SetLocation('townSquare')
               this.props.SetModeDungeon()
@@ -103,6 +103,16 @@ class Town extends React.Component {
   }
 }
 
+const TownTitle = styled.div`
+  padding: .5rem 1rem .5rem 1rem;
+  background-color: green;
+  border: 2px solid yellow;
+  border-radius: 1rem;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+`
 const DungeonCard = styled.div`
   height: 10rem;
   width: 15rem;
@@ -171,14 +181,16 @@ const OptionBlock = styled.div`
   border-radius: 1rem;
 `
 const TownDisplay = styled.div`
-  padding-top: 20rem;
-  height: 30rem;
-  width: 60rem;
+  padding-top: 10rem;
+  height: 40rem;
   background-color: green;
   width: 60%;
   background-image: url('./town1_background.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const mapStateToProps = (state) => ({status: state.status, town: state.town, system: state.system});
