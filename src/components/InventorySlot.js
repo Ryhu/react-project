@@ -4,15 +4,29 @@ import ItemModal from './modals/ItemModal';
 import { connect } from 'react-redux'; 
 import { CSSTransition } from "react-transition-group";
 
-
 class InventorySlot extends Component {
 
   constructor(){
     super()
 
     this.state = {
-      show: false
+      show: false,
+      url: ''
     }
+  }
+
+  componentDidMount(){
+    this.setState({
+      'url': this.props.item ? './' + this.props.item.image + '.png' : ''
+    })
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.item == null) { return }
+    if (prevProps.item && this.props.item.name === prevProps.item.name) { return }
+    this.setState({
+      'url': this.props.item ? './' + this.props.item.image + '.png' : ''
+    })
   }
 
   startDrag = event => {
@@ -58,8 +72,7 @@ class InventorySlot extends Component {
           <ItemImage  
             onDragStart={this.props.type === 'shop' ? null : this.startDrag}
             onDragEnd={this.props.DragEnd}
-            className={this.props.item ? '' : 'hidden'}
-            src={this.props.item ? './' + this.props.item.image + '.png' : null}>
+            src={this.state.url}>
           </ItemImage> 
         </CSSTransition>
         <CSSTransition
@@ -107,6 +120,19 @@ const ItemImage = styled.img`
     opacity: 1;
     top: 0px;
     transform: translateX(0);
+    transition: opacity 300ms, transform 300ms, top 300ms;
+  }
+
+  &.fade-exit {
+    top: 0px;
+    opacity: 1;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  &.fade-exit-active {
+    top: 40px;
+    opacity: 0;
     transition: opacity 300ms, transform 300ms, top 300ms;
   }
 
