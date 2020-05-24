@@ -18,7 +18,7 @@ class Display extends Component {
         {this.props.fields.event !== null
           ? <EventModal />
           : <>
-              { this.props.system.mode === 'dungeon' ? <Field />: <Town /> }
+              { this.props.system.mode === 'dungeon' ? <Field dungeonBackgroundImage={this.props.fields.dungeon.backgroundImage}/>: <Town /> }
             </>
         }
         <InventoryAndStatus className="invstatus">
