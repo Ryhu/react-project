@@ -44,11 +44,11 @@ class StatusBar extends Component {
         onDrop={this.dropped}>
         <HPBar>
           <MovingHPBar></MovingHPBar>
-          <HPBarText>{this.props.status.HP + '/' + this.props.status.HPMax}</HPBarText>
+          <HPBarText>{'HP: ' + this.props.status.HP + '/' + this.props.status.HPMax}</HPBarText>
         </HPBar>
         <HungerBar>
           <MovingHungerBar></MovingHungerBar>
-          <HungerBarText>{this.props.status.Hunger + '/' + this.props.status.HungerMax}</HungerBarText>
+          <HungerBarText>{'Energy: ' + this.props.status.Hunger + '/' + this.props.status.HungerMax}</HungerBarText>
         </HungerBar>
         <CoinPouch>
           <CoinText>{this.props.status.Coins}</CoinText>
