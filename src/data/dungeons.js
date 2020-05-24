@@ -2,6 +2,7 @@ let dungeons = {
   'Yornewood': {
     name: 'Yornewood',
     entrance: 'The Bramble',
+    backgroundImage: './forest_background.jpg',
     rooms: {
       'The Bramble': {
         fields: [

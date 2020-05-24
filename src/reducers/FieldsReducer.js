@@ -15,6 +15,7 @@ export default function FieldsReducer(
     rightField : [],
     dungeon: {
       name: 'Yornewood',
+      backgroundImage: './forest_background.jpg',
       rooms: {
         'The Bramble': {
           fields: [
