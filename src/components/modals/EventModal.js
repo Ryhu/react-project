@@ -2,49 +2,44 @@ import React from "react";
 import styled from 'styled-components';
 import { connect } from 'react-redux'; 
 
-class EventModal extends React.Component {
+const EventModal = (props) => {
 
-  buttonEffect(button){
+  const buttonEffect = (button) => {
     button.effects.forEach(effect => {
-      this.props[effect[0]](...effect.slice(1))
+      props[effect[0]](...effect.slice(1))
     })
   }
+  const EventModalDisplay = styled.div`
+    height: 50rem;
+    width: 60%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    box-sizing: border-box;
+    background-image: url(${props.dungeonBackgroundImage});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  `
+  let event = props.fields.event;
 
-  render() {
-
-    //   event: {
-    //     title: 'An Apple',
-    //     image: 'apple',
-    //     text: 'You come across an apple on the ground!',
-    //     buttons: [
-    //       {
-    //         name: 'Take',
-    //         effects: [
-    //           ['GetItem', 'Apple']
-    //         ]
-    //       },
-    //       {
-    //         name: 'Discard',
-    //         effects: [
-    //           ['EndEvent']
-    let event = this.props.fields.event;
-    let backgroundURL = '';
-    return (
-      <EventModalDisplay>
-        <EventContainer>
-          {event != null && 
-            <>
-            <h2>{event.title}</h2>
-            <Text>{event.text}</Text>
-            { event.buttons.map(button => (
-              <Button onClick={() => this.buttonEffect(button)}>{button.name}</Button>
-            ))}
-            </>
-          }
-        </EventContainer>
-      </EventModalDisplay>
-    );
-  }
+  return (
+    <EventModalDisplay>
+      <EventContainer>
+        {event != null && 
+          <>
+          <h2>{event.title}</h2>
+          <Text>{event.text}</Text>
+          { event.buttons.map(button => (
+            <Button onClick={() => buttonEffect(button)}>{button.name}</Button>
+          ))}
+          </>
+        }
+      </EventContainer>
+    </EventModalDisplay>
+  );
 }
 
 const EventContainer = styled.div`
@@ -56,20 +51,6 @@ const EventContainer = styled.div`
 `
 const Text = styled.p`
   display: block;
-`
-const EventModalDisplay = styled.div`
-  height: 50rem;
-  width: 60%;
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 5rem;
-  box-sizing: border-box;
-  background-image: url('./forest_background.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 `
 const Button = styled.button`
   font-size: 1.2rem;

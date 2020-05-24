@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FieldCard from './FieldCard.js'
 import styled from 'styled-components'
 import { connect } from 'react-redux'; 

@@ -16,9 +16,11 @@ class Display extends Component {
     return (
       <DisplayContainer >
         {this.props.fields.event !== null
-          ? <EventModal />
+          ? <EventModal dungeonBackgroundImage={this.props.fields.dungeon.backgroundImage}/>
           : <>
-              { this.props.system.mode === 'dungeon' ? <Field dungeonBackgroundImage={this.props.fields.dungeon.backgroundImage}/>: <Town /> }
+              { this.props.system.mode === 'dungeon' 
+                ? <Field dungeonBackgroundImage={this.props.fields.dungeon.backgroundImage}/>
+                : <Town /> }
             </>
         }
         <InventoryAndStatus className="invstatus">

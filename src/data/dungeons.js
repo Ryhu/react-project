@@ -1,7 +1,11 @@
 let dungeons = {
   'Yornewood': {
     name: 'Yornewood',
-    entrance: 'The Bramble',
+    type: 'passage',
+    entrance: 'Yorne',
+    entranceRoom: 'The Bramble',
+    exit: 'Jerne',
+    exitRoom: 'The Bramble',
     backgroundImage: './forest_background.jpg',
     rooms: {
       'The Bramble': {

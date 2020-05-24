@@ -88,7 +88,7 @@ class Town extends React.Component {
           <DungeonCard onClick={() => {
               this.props.SetLocation('townSquare')
               this.props.SetModeDungeon()
-              this.props.EnterDungeon('Yornewood')
+              this.props.EnterDungeon('Yornewood', this.props.town.town.name)
             }}>
             <BackButton>Yornewood</BackButton>
           </DungeonCard>
@@ -201,7 +201,7 @@ const mapDispatchToProps = dispatch => {
   return {
     SetLocation: (location) => dispatch({ type: 'SET_LOCATION', location: location }),
     SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
-    EnterDungeon: (location) => dispatch({ type: 'ENTER_DUNGEON', location: location }),
+    EnterDungeon: (dungeonIndex, townIndex) => dispatch({ type: 'ENTER_DUNGEON', dungeonIndex: dungeonIndex, townIndex: townIndex}),
     DeleteItem: (index) => dispatch({ type: 'DELETE_ITEM', index: index }),
     IncreaseCoins: (amount) => dispatch({ type: 'INCREASE_COINS', amount: amount }),
     DragEnd: () => dispatch({ type: 'DRAG_END' }),
