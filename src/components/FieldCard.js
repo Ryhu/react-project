@@ -8,10 +8,15 @@ class FieldCard extends Component {
     this.props.DeleteField(this.props.fieldIndex)
   }
 
+  fieldCardClick = () => {
+    this.props.TriggerEvent(this.props.card.event, this.props.fieldIndex)
+    this.props.DecreaseHunger(1)
+  }
+
   render() {
     return (
       this.props.card 
-      ? <StyledFieldCard onClick={() => {this.props.TriggerEvent(this.props.card.event, this.props.fieldIndex)}}>
+      ? <StyledFieldCard onClick={this.fieldCardClick}>
           <p>{this.props.card.name}</p>
           <p>{this.props.card.type}</p>
           <CardImage src={'./' + this.props.card.image + '.png'}></CardImage>
@@ -58,6 +63,7 @@ const mapDispatchToProps = dispatch => {
     DeleteField: (fieldIndex) => dispatch({ type: 'DELETE_FIELD', fieldIndex: fieldIndex }),
     GetItem: (itemIndex) => dispatch({ type: 'GET_ITEM', itemIndex: itemIndex }),
     TriggerEvent: (event, fieldIndex) => dispatch({ type: 'TRIGGER_EVENT', event: event, fieldIndex: fieldIndex }),
+    DecreaseHunger: (amount) => dispatch({ type: 'DECREASE_HUNGER', amount: amount }),
   };
 };
  
