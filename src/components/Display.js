@@ -8,10 +8,6 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'; 
 
 class Display extends Component {
-  componentDidMount(){
-    this.props.RandomizedSetup(5)
-  }
-  
   render() {
     return (
       <DisplayContainer >
@@ -52,10 +48,4 @@ const InventoryAndStatus = styled.div`
 
 const mapStateToProps = (state) => ({fields: state.fields, system: state.system,});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    RandomizedSetup: (amount) => dispatch({ type: 'RANDOMIZED_SETUP', amount: amount }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Display);
+export default connect(mapStateToProps)(Display);

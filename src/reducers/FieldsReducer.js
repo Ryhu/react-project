@@ -55,6 +55,7 @@ export default function FieldsReducer(
 ) {
   let tempField
   let tempState
+  const fieldIndexes = ['leftField', 'centerField', 'rightField']
   switch (action.type) {
     case 'ENTER_DUNGEON': 
       let dungeon = dungeons[action.dungeonIndex]
@@ -62,15 +63,14 @@ export default function FieldsReducer(
       tempState = {}
       tempField = []
       let roomFields = dungeon.entrance === action.townIndex ? dungeon.rooms[dungeon.entranceRoom].fields : dungeon.rooms[dungeon.exitRoom].fields 
-      let fieldIndxes = ['leftField', 'centerField', 'rightField']
-      fieldIndxes.forEach(fieldIndex => {
+      fieldIndexes.forEach(fieldIndex => {
         for(let i = 0;i<5;i++){
           tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
         tempField = []
       })
-      tempState[fieldIndxes[Math.floor(Math.random() * fieldIndxes.length)]].push(fields.ExitForest)
+      tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
       return {
         ...state,
         leftField: [...tempState.leftField],
@@ -114,7 +114,6 @@ export default function FieldsReducer(
       // amount-card ammount per pile, 
       tempState = {}
       tempField = []
-      let fieldIndexes = ['leftField', 'centerField', 'rightField']
       fieldIndexes.forEach(fieldIndex => {
         for(let i = 0;i<action.amount;i++){
           tempField.push(fields[Object.keys(fields)[Math.floor(Math.random() * Object.keys(fields).length)]])
