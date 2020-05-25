@@ -10,79 +10,56 @@ export default function FieldsReducer(
   state = {
     event: null,
     activeField: null,
+    prevRoom: null,
     leftField: [],
     centerField: [],
     rightField : [],
-    dungeon: {
-      name: 'Yornewood',
-      type: 'passage',
-      entrance: 'Yorne',
-      entranceRoom: 'The Bramble',
-      exit: 'Jerne',
-      exitRoom: 'The Bramble',
-      backgroundImage: './forest_background.jpg',
-      rooms: {
-        'The Bramble': {
-          fields: [
-            'ItemApple1', 'ItemBread1', 'ItemPotion1', 'EventTrapPitfall1_1'
-          ],
-          entrance: null,
-          exit: 'Heart of the Forest',
-          exits: [
-            { event: 'ExitForest', fieldIndex: 'centerField' },
-          ]
-        },
-        'Heart of the Forest': {
-          fields: [
-            'ItemBread1', 'ItemPotion1'
-          ],
-          entrance: 'The Bramble',
-          exit: null,
-          exits: [
-            { event: 'ExitForest', fieldIndex: 'centerField' },
-          ]
-        },
-        'The Thinning of Trees': {
-          fields: {
-            
-          }
-        }
-      },
-      exits: ['Yorne'],
-    }
+    dungeon: dungeons.Yorne
   },
   action
 ) {
   let tempField
   let tempState
+  let tempFieldIndexes
+  let roomFields
   const fieldIndexes = ['leftField', 'centerField', 'rightField']
   switch (action.type) {
     case 'ENTER_DUNGEON': 
       let dungeon = dungeons[action.dungeonIndex]
-      // amount-card ammount per pile, 
       tempState = {}
       tempField = []
-      let roomFields = dungeon.entrance === action.townIndex ? dungeon.rooms[dungeon.entranceRoom].fields : dungeon.rooms[dungeon.exitRoom].fields 
+      roomFields =  dungeon.rooms[dungeon.entrances[action.townIndex]].fields 
+
+      // fills each of the 3 fields with field cards
       fieldIndexes.forEach(fieldIndex => {
-        for(let i = 0;i<5;i++){
+        for(let i = 0; i<5; i++){
           tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
         tempField = []
       })
-      tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
+
+      // shuffles possible exit spots, inserts exits in exit spots
+      tempFieldIndexes = ['leftField', 'centerField', 'rightField']
+      for(let i = tempFieldIndexes.length-1; i>0; i--){
+        const randomIndex = Math.floor(Math.random() * i)
+        const temp = tempFieldIndexes[i]
+        tempFieldIndexes[i] = tempFieldIndexes[randomIndex]
+        tempFieldIndexes[randomIndex] = temp
+      }
+      dungeon.rooms[dungeon.entrances[action.townIndex]].exits.forEach(exit => {
+        if(exit !== null){
+          tempState[tempFieldIndexes.pop()].push(exitField(exit))
+        }
+      })
+
+      // tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
       return {
         ...state,
         leftField: [...tempState.leftField],
         centerField: [...tempState.centerField],
         rightField : [...tempState.rightField],
         dungeon: dungeons[action.dungeonIndex],
-      }
-    case 'CHANGE_ROOM':
-      return {
-        ...state,
-        event: action.event,
-        activeField: action.fieldIndex,
       }
     case 'TRIGGER_EVENT':
       return {
@@ -110,41 +87,83 @@ export default function FieldsReducer(
         activeField: null,
         event: null,
       }
-    case 'RANDOMIZED_SETUP':
+    case 'CHANGE_ROOM':
       // amount-card ammount per pile, 
+      // roomIndex
       tempState = {}
       tempField = []
+      roomFields = dungeon.rooms[action.roomIndex].fields 
+
+      // fills each of the 3 fields with field cards
       fieldIndexes.forEach(fieldIndex => {
-        for(let i = 0;i<action.amount;i++){
-          tempField.push(fields[Object.keys(fields)[Math.floor(Math.random() * Object.keys(fields).length)]])
+        for(let i = 0; i<5; i++){
+          tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
         tempField = []
       })
-      tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
+
+      // shuffles possible exit spots, inserts exits in exit spots
+      tempFieldIndexes = ['leftField', 'centerField', 'rightField']
+      for(let i = tempFieldIndexes.length-1; i>0; i--){
+        const randomIndex = Math.floor(Math.random() * i)
+        const temp = tempFieldIndexes[i]
+        tempFieldIndexes[i] = tempFieldIndexes[randomIndex]
+        tempFieldIndexes[randomIndex] = temp
+      }
+
+      dungeon.rooms[dungeon.entrances[action.townIndex]].exits.forEach(exit => {
+        if(exit !== null){
+          tempState[tempFieldIndexes.pop()].push(exitField(exit))
+        } else {
+          tempState[tempFieldIndexes.pop()].push(exitField(exit))
+        }
+      })
 
       return {
         ...state,
         leftField: [...tempState.leftField],
         centerField: [...tempState.centerField],
         rightField : [...tempState.rightField],
+        dungeon: dungeons[action.dungeonIndex],
       }
     default:
       return state;
   }
 }
 
-let changeRoom = (locationIndex) => ({
-  title: 'An Exit!',
-  image: 'Exit',
-  text: 'The forest clears up, revealing an opening in the trees and a weathered road leading out of the forest.',
-  buttons: [
-    {
-      name: 'Continue',
-      effects: [
-        ['SetModeTown'],
-        ['EndEvent'],
-      ]
-    },
-  ]
-});
+let exitField = (roomIndex) => ({
+  name: 'An Exit',
+  image: 'exit',
+  flavor: 'Exit to ' + roomIndex,
+  event: {
+    title: 'Exit',
+    image: 'Exit',
+    text: 'You leave the current area',
+    buttons: [
+      {
+        name: 'Continue',
+        effects: [
+          ['ChangeRoom', roomIndex],
+          ['EndEvent'],
+        ]
+      },
+    ]
+  }
+})
+
+
+
+
+
+// LOGIC:
+// A dungeon has multiple rooms
+// a dungeon is comprised of multiple rooms, and a dungeon can be straight path, or have branching paths.
+// a dungeon with multiple exits is called a passage
+// passages are dungeons that link towns together, and are how you travel the world
+// a challenge is a dungeon with a single instance
+// you enter and leave a challenge through the same entrance
+// challenges usually have a big boss at the end, and are akin to more classical dungeons
+// ^^^ naming tbd ^^^
+// because passages have multiple exits/entrances, they have to be reversed when comming from "the other direction"
+// because of this, rooms are linked to each other, and have multiple enterances/exits.

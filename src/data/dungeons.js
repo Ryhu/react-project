@@ -3,20 +3,37 @@ let dungeons = {
     name: 'Yornewood',
     type: 'passage',
     entrance: 'Yorne',
-    entranceRoom: 'The Bramble',
-    exit: 'Jerne',
-    exitRoom: 'The Bramble',
     backgroundImage: './forest_background.jpg',
+    entrances: {
+      'Yorne' : 'The Bramble',
+      'Jerne' : 'Heart of the Forest',
+    },
     rooms: {
       'The Bramble': {
         fields: [
           'ItemApple1', 'ItemBread1', 'ItemPotion1', 'EventTrapPitfall1_1'
         ],
         exits: [
-          { event: 'ExitForest', fieldIndex: 'centerField' },
+          null, 
+          'Heart of the Forest',
         ]
       },
+      'Heart of the Forest': {
+        fields: [
+          'ItemBread1', 'ItemPotion1'
+        ],
+        exits: [
+          null, 
+          'The Bramble',
+        ]
+      },
+      'The Thinning of Trees': {
+        fields: {
+          
+        }
+      }
     },
+    exits: ['Yorne'],
   }
 };
 
