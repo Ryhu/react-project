@@ -96,7 +96,7 @@ export default function FieldsReducer(
 
       // fills each of the 3 fields with field cards
       fieldIndexes.forEach(fieldIndex => {
-        for(let i = 0; i<5; i++){
+        for(let i = 0; i<1; i++){
           tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
@@ -115,9 +115,7 @@ export default function FieldsReducer(
       state.dungeon.rooms[action.roomIndex].exits.forEach(exit => {
         if(exit === null){
           tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
-        } else if(exit !== action.roomIndex){
-          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
-        } else {
+        } else if(exit !== state.prevRoom){
           tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
         }
       })
