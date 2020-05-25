@@ -32,7 +32,7 @@ export default function FieldsReducer(
 
       // fills each of the 3 fields with field cards
       fieldIndexes.forEach(fieldIndex => {
-        for(let i = 0; i<5; i++){
+        for(let i = 0; i<1; i++){
           tempField.push(fields[roomFields[Math.floor(Math.random() * Object.keys(roomFields).length)]])
         }
         tempState[fieldIndex] = [...tempField]
@@ -56,6 +56,7 @@ export default function FieldsReducer(
       // tempState[fieldIndexes[Math.floor(Math.random() * fieldIndexes.length)]].push(fields.ExitForest)
       return {
         ...state,
+        prevRoom: dungeon.entrances[action.townIndex],
         leftField: [...tempState.leftField],
         centerField: [...tempState.centerField],
         rightField : [...tempState.rightField],
@@ -88,11 +89,10 @@ export default function FieldsReducer(
         event: null,
       }
     case 'CHANGE_ROOM':
-      // amount-card ammount per pile, 
       // roomIndex
       tempState = {}
       tempField = []
-      roomFields = dungeon.rooms[action.roomIndex].fields 
+      roomFields = state.dungeon.rooms[action.roomIndex].fields 
 
       // fills each of the 3 fields with field cards
       fieldIndexes.forEach(fieldIndex => {
@@ -112,11 +112,13 @@ export default function FieldsReducer(
         tempFieldIndexes[randomIndex] = temp
       }
 
-      dungeon.rooms[dungeon.entrances[action.townIndex]].exits.forEach(exit => {
-        if(exit !== null){
-          tempState[tempFieldIndexes.pop()].push(exitField(exit))
+      state.dungeon.rooms[action.roomIndex].exits.forEach(exit => {
+        if(exit === null){
+          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
+        } else if(exit !== action.roomIndex){
+          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
         } else {
-          tempState[tempFieldIndexes.pop()].push(exitField(exit))
+          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
         }
       })
 
@@ -125,7 +127,7 @@ export default function FieldsReducer(
         leftField: [...tempState.leftField],
         centerField: [...tempState.centerField],
         rightField : [...tempState.rightField],
-        dungeon: dungeons[action.dungeonIndex],
+        prevRoom: action.roomIndex,
       }
     default:
       return state;

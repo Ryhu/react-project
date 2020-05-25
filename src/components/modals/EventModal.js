@@ -72,6 +72,7 @@ const mapDispatchToProps = dispatch => {
     ContinueEvent: (eventIndex) => dispatch({ type: 'CONTINUE_EVENT', eventIndex: eventIndex }),
     SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
     SetModeTown: () => dispatch({ type: "SET_MODE_TOWN" }),
+    ChangeRoom: (roomIndex) => dispatch({ type: 'CHANGE_ROOM', roomIndex: roomIndex }),
   };
 };
  
