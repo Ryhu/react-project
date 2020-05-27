@@ -73,6 +73,7 @@ const mapDispatchToProps = dispatch => {
     SetModeDungeon: () => dispatch({ type: "SET_MODE_DUNGEON" }),
     SetModeTown: () => dispatch({ type: "SET_MODE_TOWN" }),
     ChangeRoom: (roomIndex) => dispatch({ type: 'CHANGE_ROOM', roomIndex: roomIndex }),
+    ExitDungeon: (townIndex) => dispatch({ type: 'EXIT_DUNGEON', townIndex: townIndex }),
   };
 };
  

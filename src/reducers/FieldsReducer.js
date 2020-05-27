@@ -114,9 +114,12 @@ export default function FieldsReducer(
 
       state.dungeon.rooms[action.roomIndex].exits.forEach(exit => {
         if(exit === null){
-          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
+          tempState[tempFieldIndexes.pop()].push(exitDungeon(
+            Object.keys(state.dungeon.entrances).find(key => state.dungeon.entrances[key] === action.roomIndex)
+          ))
+
         } else if(exit !== state.prevRoom){
-          tempState[tempFieldIndexes.pop()].push(exitField('byebye'))
+          tempState[tempFieldIndexes.pop()].push(exitField(exit))
         }
       })
 
@@ -131,6 +134,28 @@ export default function FieldsReducer(
       return state;
   }
 }
+
+
+// TODO: potentially combine exitDungeon and exitField, with reducers
+let exitDungeon = (townIndex) => ({
+  name: 'An Exit',
+  image: 'exit',
+  flavor: 'Exit to ' + townIndex,
+  event: {
+    title: 'Exit',
+    image: 'Exit',
+    text: 'You leave the current area',
+    buttons: [
+      {
+        name: 'Continue',
+        effects: [
+          ['ExitDungeon', townIndex],
+          ['EndEvent'],
+        ]
+      },
+    ]
+  }
+})
 
 let exitField = (roomIndex) => ({
   name: 'An Exit',
